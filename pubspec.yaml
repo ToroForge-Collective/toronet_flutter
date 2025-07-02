@@ -1,7 +1,9 @@
 name: toronet
-description: "A new Flutter package project."
+description: >
+  Toronet is a Dart/Flutter SDK providing seamless integration with blockchain, wallet, payments, KYC, exchange, and balance APIs. 
+  It enables developers to build secure, scalable, and feature-rich financial applications with ease.
 version: 0.0.1
-homepage:
+homepage: https://github.com/ToroForge-Collective/toronet_flutter
 
 environment:
   sdk: ^3.7.2
