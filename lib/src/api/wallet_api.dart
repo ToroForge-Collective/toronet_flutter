@@ -5,10 +5,14 @@ Future<Map<String, dynamic>> createWalletApi(
   String baseUrl,
   String password,
 ) async {
-  final response = await dio.post(
-    '$baseUrl/wallet/create',
-    data: {'password': password},
-  );
+  final String url = '$baseUrl/api/keystore';
+  final data = {
+    'op': 'createkey',
+    'params': [
+      {'name': 'pwd', 'value': password},
+    ],
+  };
+  final response = await dio.post(url, data: data);
   return response.data;
 }
 
@@ -18,10 +22,16 @@ Future<Map<String, dynamic>> importWalletFromPrivateKeyApi(
   String privateKey,
   String password,
 ) async {
-  final response = await dio.post(
-    '$baseUrl/wallet/import',
-    data: {'pvkey': privateKey, 'password': password},
-  );
+  final String url = '$baseUrl/api/keystore';
+  final data = {
+    'op': 'importkey',
+    'params': [
+      {"name": "prvkey", "value": privateKey},
+      {"name": "pwd", "value": password},
+    ],
+  };
+  final response = await dio.post(url, data: data);
+  if(response.data['result'] == false) throw Exception(response.data['error']);
   return response.data;
 }
 
@@ -31,28 +41,62 @@ Future<bool> verifyWalletPasswordApi(
   String address,
   String password,
 ) async {
-  final response = await dio.post(
-    '$baseUrl/wallet/verify-password',
-    data: {'address': address, 'password': password},
-  );
-  return response.data['isValid'] as bool;
+  final String url = '$baseUrl/api/keystore';
+  final data = {
+    'op': 'verifykey',
+    'params': [
+      {'name': 'addr', 'value': address},
+      {'name': 'pwd', 'value': password},
+    ],
+  };
+
+  final response = await dio.post(url, data: data);
+  if(response.data['result'] == false) throw Exception(response.data['error']);
+  return response.data['result'] as bool;
 }
 
-Future<String> getWalletKeyApi(Dio dio, String baseUrl, String address) async {
-  final response = await dio.get(
-    '$baseUrl/wallet/key',
-    queryParameters: {'address': address},
+Future< Map<String, dynamic>> getWalletKeyApi(Dio dio, String baseUrl, String address, String password) async {
+  final String url = '$baseUrl/api/keystore';
+  final data = {
+    'op': 'getkey',
+    'params': [
+      {'name': 'addr', 'value': address},
+      {'name': 'pwd', 'value': password},
+    ],
+  };
+  final response = await dio.request(
+    url,
+    data: data,
+    options: Options(
+      method: 'GET',
+      headers: {'Content-Type': 'application/json'},
+    ),
   );
-  return response.data['key'] as String;
+  //print("getWalletKeyApi: ${response.data}");
+  if(response.data['result'] == false) throw Exception(response.data['error']);
+  return response.data['keystoredata'] as Map<String, dynamic>;
 }
 
 Future<bool> isTNSAvailableApi(Dio dio, String baseUrl, String username) async {
-  final response = await dio.get(
-    '$baseUrl/tns/isNameUsed',
-    queryParameters: {'username': username},
+  final String url = '$baseUrl/api/tns';
+  final data = {
+    'op': 'isnameused',
+    'params': [
+      {'name': 'name', 'value': username},
+    ],
+  };
+  final response = await dio.request(
+    url,
+    data: data,
+    options: Options(
+      method: 'GET',
+      headers: {'Content-Type': 'application/json'},
+    ),
   );
+ // print("isTNSAvailableApi: ${response.data}");
+  if(response.data['result'] == false) throw Exception(response.data['error']);
   // isNameUsed returns true if taken, so available = !taken
-  return !(response.data['isUsed'] as bool);
+  return !(response.data['isused'] as bool);
 }
 
 Future<void> configureTNSApi(
@@ -62,8 +106,16 @@ Future<void> configureTNSApi(
   String password,
   String username,
 ) async {
-  await dio.post(
-    '$baseUrl/tns/setName',
-    data: {'address': address, 'password': password, 'username': username},
-  );
+  final String url = '$baseUrl/api/tns/cl';
+  final data = {
+    'op': 'setname',
+    'params': [
+      {'name': 'client', 'value': address},
+      {'name': 'clientpwd', 'value': password},
+      {'name': 'name', 'value': username},
+    ],
+  };
+  final response = await dio.post(url, data: data);
+  if(response.data['result'] == false) throw Exception(response.data['error']);
+  //print("configureTNSApi: ${response.data}");
 }

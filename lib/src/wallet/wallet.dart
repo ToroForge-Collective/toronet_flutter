@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 
 class Wallet extends Equatable {
@@ -35,7 +34,7 @@ abstract class WalletService {
 
   /// Get the wallet key for a given address.
   /// Returns the wallet key as a string.
-  Future<String> getWalletKey({required String address});
+  Future< Map<String, dynamic>> getWalletKey({required String address, required String password});
 
   /// Check if a username (TNS) is available.
   Future<bool> isTNSAvailable({required String username});

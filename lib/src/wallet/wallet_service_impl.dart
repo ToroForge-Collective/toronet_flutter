@@ -59,10 +59,10 @@ class WalletServiceImpl implements WalletService {
   }
 
   /// Get the wallet key for a given address.
-  /// Returns the wallet key as a string.
+  /// Returns the wallet key as a string.   
   @override
-  Future<String> getWalletKey({required String address}) async {
-    return getWalletKeyApi(dio, baseUrl, address);
+  Future< Map<String, dynamic>> getWalletKey({required String address, required String password}) async {
+    return getWalletKeyApi(dio, baseUrl, address, password);
   }
 
   /// Check if a username (TNS) is available.
