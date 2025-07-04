@@ -6,6 +6,7 @@ export 'src/balance/balance.dart';
 export 'src/kyc/kyc.dart';
 export 'src/payments/payments.dart';
 export 'src/exchange/exchange.dart';
+export 'src/query/query.dart';
 // ... add more exports as SDK grows
 
 /// Example usage:
