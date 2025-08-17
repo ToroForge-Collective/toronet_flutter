@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 
 class KycParams {
   final String firstName;
