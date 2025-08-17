@@ -5,8 +5,8 @@ import 'package:toronet/toronet.dart';
 main() async {
   final ToronetSDK sdk = ToronetSDK();
   Wallet wallet = await sdk.walletService.createWallet(
-    username: 'itadori_yuji',
-    password: 'sukuna',
+    username: 'naruto_uzumaki',
+    password: 'kurama',
   );
 
   print("Wallet created: ${wallet.address}");
@@ -26,11 +26,11 @@ main() async {
   var latestBlockData = await sdk.blockchainService.getLatestBlockData();
   print("latest block data: $latestBlockData");
 
-  var walletDetails = await sdk.walletService.importWalletFromPrivateKey(
-    privateKey: "0x03c8ef05663bd8e4ad8074d650e4ccd33310cd95",
-    password: "testpassword",
-  );
-  print("wallet details: $walletDetails");
+  // var walletDetails = await sdk.walletService.importWalletFromPrivateKey(
+  //   privateKey: "0x03c8ef05663bd8e4ad8074d650e4ccd33310cd95",
+  //   password: "testpassword",
+  // );
+  // print("wallet details: $walletDetails");
 
   var walletBalance = await sdk.balanceService.getBalance(
     address: "0x03c8ef05663bd8e4ad8074d650e4ccd33310cd95",
