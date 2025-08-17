@@ -35,7 +35,7 @@ class ToronetSDK {
   /// Exchange rate queries
   final ExchangeServiceImpl exchangeService;
 
-  ToronetSDK({required String baseUrl, Dio? dio})
+  ToronetSDK({String baseUrl = 'https://www.toronet.org', Dio? dio})
     : walletService = WalletServiceImpl(dio: dio ?? Dio(), baseUrl: baseUrl),
       blockchainService = BlockchainServiceImpl(
         dio: dio ?? Dio(),
