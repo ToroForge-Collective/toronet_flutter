@@ -5,12 +5,12 @@ Future<Map<String, dynamic>> fetchBlockchainStatus(
   String baseUrl,
 ) async {
   final String url = '$baseUrl/api/blockchain';
-  
+
   final response = await dio.request(
     url,
     options: Options(
       method: 'GET',
-      headers: {'Content-Type': 'application/json'},  
+      headers: {'Content-Type': 'application/json'},
     ),
   );
   if (response.data['result'] == false) throw Exception(response.data['error']);
@@ -111,5 +111,3 @@ Future<Map<String, dynamic>> getRevertReason(
   if (response.data['result'] == false) throw Exception(response.data['error']);
   return response.data;
 }
-
-
