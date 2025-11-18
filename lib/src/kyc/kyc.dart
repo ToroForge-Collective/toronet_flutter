@@ -1,4 +1,3 @@
-
 class KycParams {
   final String firstName;
   final String middleName;
