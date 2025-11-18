@@ -10,6 +10,6 @@ class ExchangeServiceImpl implements ExchangeService {
 
   @override
   Future<Map<String, dynamic>> getSupportedAssetsExchangeRates() async {
-    return fetchSupportedAssetsExchangeRates(dio, baseUrl); 
+    return fetchSupportedAssetsExchangeRates(dio, baseUrl);
   }
 }
