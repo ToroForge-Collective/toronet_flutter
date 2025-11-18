@@ -5,7 +5,7 @@ Future<Map<String, dynamic>> fetchBalance(
   String baseUrl,
   String address,
 ) async {
-   final String url = '$baseUrl/api/query';
+  final String url = '$baseUrl/api/query';
   final data = {
     'op': 'getaddrbalance',
     'params': [
@@ -21,6 +21,6 @@ Future<Map<String, dynamic>> fetchBalance(
     ),
   );
   //print("getWalletKeyApi: ${response.data}");
- 
+
   return response.data as Map<String, dynamic>;
 }
