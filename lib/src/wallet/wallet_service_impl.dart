@@ -59,9 +59,12 @@ class WalletServiceImpl implements WalletService {
   }
 
   /// Get the wallet key for a given address.
-  /// Returns the wallet key as a string.   
+  /// Returns the wallet key as a string.
   @override
-  Future< Map<String, dynamic>> getWalletKey({required String address, required String password}) async {
+  Future<Map<String, dynamic>> getWalletKey({
+    required String address,
+    required String password,
+  }) async {
     return getWalletKeyApi(dio, baseUrl, address, password);
   }
 
@@ -85,5 +88,36 @@ class WalletServiceImpl implements WalletService {
       throw Exception('Address, password, and username are required');
     }
     await configureTNSApi(dio, baseUrl, address, password, username);
+  }
+
+  /// Update wallet password.
+  @override
+  Future<void> updateWalletPassword({
+    required String address,
+    required String oldPassword,
+    required String newPassword,
+  }) async {
+    if (address.isEmpty || oldPassword.isEmpty || newPassword.isEmpty) {
+      throw Exception('Address, old password, and new password are required');
+    }
+    await updateWalletPasswordApi(
+      dio,
+      baseUrl,
+      address,
+      oldPassword,
+      newPassword,
+    );
+  }
+
+  /// Delete wallet from server.
+  @override
+  Future<void> deleteWallet({
+    required String address,
+    required String password,
+  }) async {
+    if (address.isEmpty || password.isEmpty) {
+      throw Exception('Address and password are required');
+    }
+    await deleteWalletApi(dio, baseUrl, address, password);
   }
 }
