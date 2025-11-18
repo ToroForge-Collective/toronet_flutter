@@ -24,9 +24,7 @@ class BlockchainServiceImpl implements BlockchainService {
   }
 
   @override
-  Future<Map<String, dynamic>> getBlockchainTransactions(
-    int count,
-  ) async {
-      return fetchLatestBlockData(dio, baseUrl);
+  Future<Map<String, dynamic>> getBlockchainTransactions(int count) async {
+    return fetchLatestBlockData(dio, baseUrl);
   }
 }
