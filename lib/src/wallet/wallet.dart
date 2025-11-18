@@ -34,7 +34,10 @@ abstract class WalletService {
 
   /// Get the wallet key for a given address.
   /// Returns the wallet key as a string.
-  Future< Map<String, dynamic>> getWalletKey({required String address, required String password});
+  Future<Map<String, dynamic>> getWalletKey({
+    required String address,
+    required String password,
+  });
 
   /// Check if a username (TNS) is available.
   Future<bool> isTNSAvailable({required String username});
@@ -44,5 +47,18 @@ abstract class WalletService {
     required String address,
     required String password,
     required String username,
+  });
+
+  /// Update wallet password.
+  Future<void> updateWalletPassword({
+    required String address,
+    required String oldPassword,
+    required String newPassword,
+  });
+
+  /// Delete wallet from server.
+  Future<void> deleteWallet({
+    required String address,
+    required String password,
   });
 }
