@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import '../exceptions/toro_exceptions.dart';
 
 Future<Map<String, dynamic>> createWalletApi(
   Dio dio,
@@ -31,7 +32,9 @@ Future<Map<String, dynamic>> importWalletFromPrivateKeyApi(
     ],
   };
   final response = await dio.post(url, data: data);
-  if(response.data['result'] == false) throw Exception(response.data['error']);
+  if (response.data['result'] == false) {
+    throw APIException(response.data['error'] ?? 'Unknown error');
+  }
   return response.data;
 }
 
@@ -51,11 +54,18 @@ Future<bool> verifyWalletPasswordApi(
   };
 
   final response = await dio.post(url, data: data);
-  if(response.data['result'] == false) throw Exception(response.data['error']);
+  if (response.data['result'] == false) {
+    throw APIException(response.data['error'] ?? 'Unknown error');
+  }
   return response.data['result'] as bool;
 }
 
-Future< Map<String, dynamic>> getWalletKeyApi(Dio dio, String baseUrl, String address, String password) async {
+Future<Map<String, dynamic>> getWalletKeyApi(
+  Dio dio,
+  String baseUrl,
+  String address,
+  String password,
+) async {
   final String url = '$baseUrl/api/keystore';
   final data = {
     'op': 'getkey',
@@ -73,7 +83,9 @@ Future< Map<String, dynamic>> getWalletKeyApi(Dio dio, String baseUrl, String ad
     ),
   );
   //print("getWalletKeyApi: ${response.data}");
-  if(response.data['result'] == false) throw Exception(response.data['error']);
+  if (response.data['result'] == false) {
+    throw APIException(response.data['error'] ?? 'Unknown error');
+  }
   return response.data['keystoredata'] as Map<String, dynamic>;
 }
 
@@ -93,8 +105,10 @@ Future<bool> isTNSAvailableApi(Dio dio, String baseUrl, String username) async {
       headers: {'Content-Type': 'application/json'},
     ),
   );
- // print("isTNSAvailableApi: ${response.data}");
-  if(response.data['result'] == false) throw Exception(response.data['error']);
+  // print("isTNSAvailableApi: ${response.data}");
+  if (response.data['result'] == false) {
+    throw APIException(response.data['error'] ?? 'Unknown error');
+  }
   // isNameUsed returns true if taken, so available = !taken
   return !(response.data['isused'] as bool);
 }
@@ -116,6 +130,50 @@ Future<void> configureTNSApi(
     ],
   };
   final response = await dio.post(url, data: data);
-  if(response.data['result'] == false) throw Exception(response.data['error']);
+  if (response.data['result'] == false) {
+    throw APIException(response.data['error'] ?? 'Unknown error');
+  }
   //print("configureTNSApi: ${response.data}");
+}
+
+Future<void> updateWalletPasswordApi(
+  Dio dio,
+  String baseUrl,
+  String address,
+  String oldPassword,
+  String newPassword,
+) async {
+  final String url = '$baseUrl/api/keystore';
+  final data = {
+    'op': 'updatekeypwd',
+    'params': [
+      {'name': 'addr', 'value': address},
+      {'name': 'oldpwd', 'value': oldPassword},
+      {'name': 'newpwd', 'value': newPassword},
+    ],
+  };
+  final response = await dio.post(url, data: data);
+  if (response.data['result'] == false) {
+    throw APIException(response.data['error'] ?? 'Unknown error');
+  }
+}
+
+Future<void> deleteWalletApi(
+  Dio dio,
+  String baseUrl,
+  String address,
+  String password,
+) async {
+  final String url = '$baseUrl/api/keystore';
+  final data = {
+    'op': 'deletekey',
+    'params': [
+      {'name': 'addr', 'value': address},
+      {'name': 'pwd', 'value': password},
+    ],
+  };
+  final response = await dio.post(url, data: data);
+  if (response.data['result'] == false) {
+    throw APIException(response.data['error'] ?? 'Unknown error');
+  }
 }
