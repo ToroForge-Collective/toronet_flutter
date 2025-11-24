@@ -88,4 +88,3 @@ abstract class ArbitrumService {
     required String adminpwd,
   });
 }
-
