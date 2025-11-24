@@ -199,4 +199,3 @@ abstract class SolanaService {
     required String adminpwd,
   });
 }
-
