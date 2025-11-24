@@ -23,6 +23,13 @@ A comprehensive Dart/Flutter SDK for interacting with the Toronet blockchain and
 - **Products Service**: Product management operations
 - **Virtual Wallet Service**: Virtual wallet creation, fetching, and transaction updates
 
+### Multi-Chain Bridge Services
+- **Solana Service**: Complete Solana blockchain integration including address creation, validation, transfers, bridge operations, balance queries, transaction queries, and payment operations
+- **Polygon Service**: Polygon blockchain bridge, balance queries, transaction queries, and payment operations
+- **BSC Service**: Binance Smart Chain bridge, balance queries, transaction queries, and payment operations
+- **Base Service**: Base blockchain bridge, balance queries, transaction queries, and payment operations
+- **Arbitrum Service**: Arbitrum blockchain bridge, balance queries, transaction queries, and payment operations
+
 ### Configuration
 - **Network Selection**: Easy switching between mainnet and testnet
 - **Custom URLs**: Support for custom base URLs and ConnectW URLs
@@ -491,6 +498,282 @@ final updated = await sdk.productsService.updateProduct(
 );
 ```
 
+### Multi-Chain Bridge Operations
+
+#### Solana Operations
+
+```dart
+// Create Solana address
+final solAddress = await sdk.solanaService.createSolanaAddress(
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Validate Solana address
+final isValid = await sdk.solanaService.isValidSolanaAddress(
+  address: '3uwR7HMDuK6dXwZAfx8jHwPcyXsYmFuHWJv3zvJxRE9w',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Create Toronet-linked Solana address
+final toronetSolAddress = await sdk.solanaService.createToronetSolanaAddress(
+  address: wallet.address,
+  password: 'password',
+);
+
+// Generate virtual wallet for Solana
+final solVirtualWallet = await sdk.solanaService.generateVirtualWallet(
+  address: wallet.address,
+  password: 'password',
+  payername: 'John Doe',
+  currency: 'USDTSOL', // or 'SOL'
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Transfer native SOL
+final transferResult = await sdk.solanaService.transferSolana(
+  from: '3uwR7HMDuK6dXwZAfx8jHwPcyXsYmFuHWJv3zvJxRE9w',
+  to: '2Ha5ETJGGahgeLpqhTiAYWhAtre1bAGaG47zTDPzJcP4',
+  amount: '0.1',
+  password: 'password',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Transfer SOL token (SPL token)
+final tokenTransfer = await sdk.solanaService.transferSolToken(
+  from: '3uwR7HMDuK6dXwZAfx8jHwPcyXsYmFuHWJv3zvJxRE9w',
+  to: '2Ha5ETJGGahgeLpqhTiAYWhAtre1bAGaG47zTDPzJcP4',
+  amount: '2.5',
+  password: 'password',
+  contractAddress: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
+  tokenName: 'USDC',
+  useTokenAsFees: 'true',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Get SOL balance
+final solBalance = await sdk.solanaService.getSolBalance(
+  address: '3uwR7HMDuK6dXwZAfx8jHwPcyXsYmFuHWJv3zvJxRE9w',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Get token balance
+final tokenBalance = await sdk.solanaService.getSolTokenBalance(
+  address: '3uwR7HMDuK6dXwZAfx8jHwPcyXsYmFuHWJv3zvJxRE9w',
+  contractAddress: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Get Solana transactions
+final transactions = await sdk.solanaService.getSolTransactions(
+  address: '3uwR7HMDuK6dXwZAfx8jHwPcyXsYmFuHWJv3zvJxRE9w',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Bridge token from Solana to Toronet
+final bridgeResult = await sdk.solanaService.bridgeToken(
+  from: wallet.address,
+  password: 'password',
+  contractAddress: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
+  tokenName: 'USDC',
+  amount: '3',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Get bridge token fee
+final bridgeFee = await sdk.solanaService.getBridgeTokenFee(
+  contractAddress: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
+  amount: '4',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Initialize payment with Solana
+final paymentInit = await sdk.solanaService.paymentInitialize(
+  address: wallet.address,
+  password: 'password',
+  currency: 'SOL', // or 'USDCSOL'
+  token: 'TORO',
+  amount: '10.0',
+  payername: 'John Doe',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Record fiat transaction for Solana
+final recordResult = await sdk.solanaService.recordFiatTransaction(
+  currency: 'SOL', // or 'USDCSOL'
+  txid: 'transaction_id',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+```
+
+#### Polygon Operations
+
+```dart
+// Bridge token from Polygon to Toronet
+final bridgeResult = await sdk.polygonService.bridgeToken(
+  from: wallet.address,
+  password: 'password',
+  contractAddress: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359',
+  tokenName: 'USDC',
+  amount: '2',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Get Polygon balance
+final balance = await sdk.polygonService.getBalance(
+  address: wallet.address,
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Get token balance
+final tokenBalance = await sdk.polygonService.getTokenBalance(
+  address: wallet.address,
+  contractAddress: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359',
+  tokenName: 'USDC',
+);
+
+// Get transactions
+final transactions = await sdk.polygonService.getTransactions(
+  address: wallet.address,
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Initialize payment with Polygon
+final paymentInit = await sdk.polygonService.paymentInitialize(
+  address: wallet.address,
+  password: 'password',
+  currency: 'USDCPOLY',
+  token: 'TORO',
+  amount: '2.0',
+  payername: 'John Doe',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+```
+
+#### BSC Operations
+
+```dart
+// Bridge token from BSC to Toronet
+final bridgeResult = await sdk.bscService.bridgeToken(
+  from: wallet.address,
+  password: 'password',
+  contractAddress: '0x55d398326f99059ff775485246999027b3197955',
+  tokenName: 'USDT',
+  amount: '2',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Get BSC balance
+final balance = await sdk.bscService.getBalance(
+  address: wallet.address,
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Get token balance
+final tokenBalance = await sdk.bscService.getTokenBalance(
+  address: wallet.address,
+  contractAddress: '0x55d398326f99059ff775485246999027b3197955',
+  tokenName: 'USDT',
+);
+
+// Initialize payment with BSC
+final paymentInit = await sdk.bscService.paymentInitialize(
+  address: wallet.address,
+  password: 'password',
+  currency: 'USDTBSC',
+  token: 'TORO',
+  amount: '2.0',
+  payername: 'John Doe',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+```
+
+#### Base Operations
+
+```dart
+// Bridge token from Base to Toronet
+final bridgeResult = await sdk.baseService.bridgeToken(
+  from: wallet.address,
+  password: 'password',
+  contractAddress: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
+  tokenName: 'USDC',
+  amount: '2',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Get Base balance
+final balance = await sdk.baseService.getBalance(
+  address: wallet.address,
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Initialize payment with Base
+final paymentInit = await sdk.baseService.paymentInitialize(
+  address: wallet.address,
+  password: 'password',
+  currency: 'USDCBASE',
+  token: 'TORO',
+  amount: '2.0',
+  payername: 'John Doe',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+```
+
+#### Arbitrum Operations
+
+```dart
+// Bridge token from Arbitrum to Toronet
+final bridgeResult = await sdk.arbitrumService.bridgeToken(
+  from: wallet.address,
+  password: 'password',
+  contractAddress: '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
+  tokenName: 'USDC',
+  amount: '2',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Get Arbitrum balance
+final balance = await sdk.arbitrumService.getBalance(
+  address: wallet.address,
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Initialize payment with Arbitrum
+final paymentInit = await sdk.arbitrumService.paymentInitialize(
+  address: wallet.address,
+  password: 'password',
+  currency: 'USDCARB',
+  token: 'TORO',
+  amount: '2.0',
+  payername: 'John Doe',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+```
+
 ---
 
 ## Network Configuration
@@ -573,6 +856,11 @@ Main entry point providing access to all services:
 - `tokenService`: Token operations
 - `productsService`: Product management
 - `virtualService`: Virtual wallet operations
+- `solanaService`: Solana blockchain operations
+- `polygonService`: Polygon blockchain operations
+- `bscService`: BSC (Binance Smart Chain) blockchain operations
+- `baseService`: Base blockchain operations
+- `arbitrumService`: Arbitrum blockchain operations
 
 ### Supported Currencies
 
