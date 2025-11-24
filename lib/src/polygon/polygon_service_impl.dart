@@ -163,4 +163,3 @@ class PolygonServiceImpl implements PolygonService {
     );
   }
 }
-
