@@ -53,10 +53,9 @@ Future<Map<String, dynamic>> recordProductApi(
 ) async {
   final url = '$baseUrl/api/product';
   final params = [
-    ...productData.entries.map((e) => {
-      'name': e.key,
-      'value': e.value.toString(),
-    })
+    ...productData.entries.map(
+      (e) => {'name': e.key, 'value': e.value.toString()},
+    ),
   ];
   final data = {'op': 'recordproduct', 'params': params};
   final response = await dio.post(
@@ -87,10 +86,9 @@ Future<Map<String, dynamic>> updateProductApi(
   final url = '$baseUrl/api/product';
   final params = [
     {'name': 'id', 'value': productId},
-    ...productData.entries.map((e) => {
-      'name': e.key,
-      'value': e.value.toString(),
-    })
+    ...productData.entries.map(
+      (e) => {'name': e.key, 'value': e.value.toString()},
+    ),
   ];
   final data = {'op': 'updateproduct', 'params': params};
   final response = await dio.post(
