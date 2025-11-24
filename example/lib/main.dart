@@ -466,6 +466,175 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   // ====================================================================
+  // Multi-Chain Bridge Operations
+  // ====================================================================
+
+  // Solana Operations
+  Future<void> _getSolBalance() async {
+    _setLoading(true);
+    try {
+      final balance = await sdk.solanaService.getSolBalance(
+        address: testAddress,
+        admin: adminUser,
+        adminpwd: adminPwd,
+      );
+      _updateResult('SOL Balance: $balance');
+    } catch (e) {
+      _updateResult('Error getting SOL balance: $e');
+    }
+  }
+
+  Future<void> _bridgeTokenSolana() async {
+    _setLoading(true);
+    try {
+      final result = await sdk.solanaService.bridgeToken(
+        from: _wallet?.address ?? testAddress,
+        password: 'password',
+        contractAddress: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
+        tokenName: 'USDC',
+        amount: '3',
+        admin: adminUser,
+        adminpwd: adminPwd,
+      );
+      _updateResult('Bridge result: $result');
+    } catch (e) {
+      _updateResult('Error bridging token: $e');
+    }
+  }
+
+  // Polygon Operations
+  Future<void> _getPolygonBalance() async {
+    _setLoading(true);
+    try {
+      final balance = await sdk.polygonService.getBalance(
+        address: testAddress,
+        admin: adminUser,
+        adminpwd: adminPwd,
+      );
+      _updateResult('Polygon Balance: $balance');
+    } catch (e) {
+      _updateResult('Error getting Polygon balance: $e');
+    }
+  }
+
+  Future<void> _bridgeTokenPolygon() async {
+    _setLoading(true);
+    try {
+      final result = await sdk.polygonService.bridgeToken(
+        from: _wallet?.address ?? testAddress,
+        password: 'password',
+        contractAddress: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359',
+        tokenName: 'USDC',
+        amount: '2',
+        admin: adminUser,
+        adminpwd: adminPwd,
+      );
+      _updateResult('Bridge result: $result');
+    } catch (e) {
+      _updateResult('Error bridging token: $e');
+    }
+  }
+
+  // BSC Operations
+  Future<void> _getBscBalance() async {
+    _setLoading(true);
+    try {
+      final balance = await sdk.bscService.getBalance(
+        address: testAddress,
+        admin: adminUser,
+        adminpwd: adminPwd,
+      );
+      _updateResult('BSC Balance: $balance');
+    } catch (e) {
+      _updateResult('Error getting BSC balance: $e');
+    }
+  }
+
+  Future<void> _bridgeTokenBsc() async {
+    _setLoading(true);
+    try {
+      final result = await sdk.bscService.bridgeToken(
+        from: _wallet?.address ?? testAddress,
+        password: 'password',
+        contractAddress: '0x55d398326f99059ff775485246999027b3197955',
+        tokenName: 'USDT',
+        amount: '2',
+        admin: adminUser,
+        adminpwd: adminPwd,
+      );
+      _updateResult('Bridge result: $result');
+    } catch (e) {
+      _updateResult('Error bridging token: $e');
+    }
+  }
+
+  // Base Operations
+  Future<void> _getBaseBalance() async {
+    _setLoading(true);
+    try {
+      final balance = await sdk.baseService.getBalance(
+        address: testAddress,
+        admin: adminUser,
+        adminpwd: adminPwd,
+      );
+      _updateResult('Base Balance: $balance');
+    } catch (e) {
+      _updateResult('Error getting Base balance: $e');
+    }
+  }
+
+  Future<void> _bridgeTokenBase() async {
+    _setLoading(true);
+    try {
+      final result = await sdk.baseService.bridgeToken(
+        from: _wallet?.address ?? testAddress,
+        password: 'password',
+        contractAddress: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
+        tokenName: 'USDC',
+        amount: '2',
+        admin: adminUser,
+        adminpwd: adminPwd,
+      );
+      _updateResult('Bridge result: $result');
+    } catch (e) {
+      _updateResult('Error bridging token: $e');
+    }
+  }
+
+  // Arbitrum Operations
+  Future<void> _getArbitrumBalance() async {
+    _setLoading(true);
+    try {
+      final balance = await sdk.arbitrumService.getBalance(
+        address: testAddress,
+        admin: adminUser,
+        adminpwd: adminPwd,
+      );
+      _updateResult('Arbitrum Balance: $balance');
+    } catch (e) {
+      _updateResult('Error getting Arbitrum balance: $e');
+    }
+  }
+
+  Future<void> _bridgeTokenArbitrum() async {
+    _setLoading(true);
+    try {
+      final result = await sdk.arbitrumService.bridgeToken(
+        from: _wallet?.address ?? testAddress,
+        password: 'password',
+        contractAddress: '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
+        tokenName: 'USDC',
+        amount: '2',
+        admin: adminUser,
+        adminpwd: adminPwd,
+      );
+      _updateResult('Bridge result: $result');
+    } catch (e) {
+      _updateResult('Error bridging token: $e');
+    }
+  }
+
+  // ====================================================================
   // Error Handling Demo
   // ====================================================================
   Future<void> _demoErrorHandling() async {
@@ -518,7 +687,7 @@ class _MyHomePageState extends State<MyHomePage> {
               : SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Column(
+          child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       // Network Status
@@ -532,7 +701,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 16),
+              const SizedBox(height: 16),
 
                       // Wallet Operations Section
                       _buildSection(context, 'Wallet Operations', [
@@ -625,6 +794,36 @@ class _MyHomePageState extends State<MyHomePage> {
                         _buildButton('Get Balance', _getBalance),
                       ]),
 
+                      // Solana Operations Section
+                      _buildSection(context, 'Solana Operations', [
+                        _buildButton('Get SOL Balance', _getSolBalance),
+                        _buildButton('Bridge Token (Solana)', _bridgeTokenSolana),
+                      ]),
+
+                      // Polygon Operations Section
+                      _buildSection(context, 'Polygon Operations', [
+                        _buildButton('Get Polygon Balance', _getPolygonBalance),
+                        _buildButton('Bridge Token (Polygon)', _bridgeTokenPolygon),
+                      ]),
+
+                      // BSC Operations Section
+                      _buildSection(context, 'BSC Operations', [
+                        _buildButton('Get BSC Balance', _getBscBalance),
+                        _buildButton('Bridge Token (BSC)', _bridgeTokenBsc),
+                      ]),
+
+                      // Base Operations Section
+                      _buildSection(context, 'Base Operations', [
+                        _buildButton('Get Base Balance', _getBaseBalance),
+                        _buildButton('Bridge Token (Base)', _bridgeTokenBase),
+                      ]),
+
+                      // Arbitrum Operations Section
+                      _buildSection(context, 'Arbitrum Operations', [
+                        _buildButton('Get Arbitrum Balance', _getArbitrumBalance),
+                        _buildButton('Bridge Token (Arbitrum)', _bridgeTokenArbitrum),
+                      ]),
+
                       // Error Handling Section
                       _buildSection(context, 'Error Handling Demo', [
                         _buildButton('Demo Error Handling', _demoErrorHandling),
@@ -644,7 +843,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 style: Theme.of(context).textTheme.titleMedium,
                               ),
                               const SizedBox(height: 8),
-                              Text(
+              Text(
                                 _result.isEmpty
                                     ? 'No operation performed yet'
                                     : _result,
@@ -653,11 +852,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             ],
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
               ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
