@@ -197,26 +197,45 @@ Future<Map<String, dynamic>> paymentInitializePolygonApi({
     {'name': 'amount', 'value': amount},
     {'name': 'payername', 'value': payername},
   ];
-  if (successUrl != null) params.add({'name': 'success_url', 'value': successUrl});
+  if (successUrl != null) {
+    params.add({'name': 'success_url', 'value': successUrl});
+  }
   if (cancelUrl != null) params.add({'name': 'cancel_url', 'value': cancelUrl});
-  if (paymentType != null) params.add({'name': 'paymenttype', 'value': paymentType});
-  if (passthrough != null) params.add({'name': 'passthrough', 'value': passthrough});
-  if (commissionRate != null) params.add({'name': 'commissionrate', 'value': commissionRate});
+  if (paymentType != null) {
+    params.add({'name': 'paymenttype', 'value': paymentType});
+  }
+  if (passthrough != null) {
+    params.add({'name': 'passthrough', 'value': passthrough});
+  }
+  if (commissionRate != null) {
+    params.add({'name': 'commissionrate', 'value': commissionRate});
+  }
   if (exchange != null) params.add({'name': 'exchange', 'value': exchange});
-  if (payerAddress != null) params.add({'name': 'payeraddress', 'value': payerAddress});
+  if (payerAddress != null) {
+    params.add({'name': 'payeraddress', 'value': payerAddress});
+  }
   if (payerCity != null) params.add({'name': 'payercity', 'value': payerCity});
-  if (payerState != null) params.add({'name': 'payerstate', 'value': payerState});
-  if (payerCountry != null) params.add({'name': 'payercountry', 'value': payerCountry});
-  if (payerZipcode != null) params.add({'name': 'payerzipcode', 'value': payerZipcode});
-  if (payerPhone != null) params.add({'name': 'payerphone', 'value': payerPhone});
-  if (reuseWallet != null) params.add({'name': 'reusewallet', 'value': reuseWallet});
-  if (description != null) params.add({'name': 'description', 'value': description});
+  if (payerState != null) {
+    params.add({'name': 'payerstate', 'value': payerState});
+  }
+  if (payerCountry != null) {
+    params.add({'name': 'payercountry', 'value': payerCountry});
+  }
+  if (payerZipcode != null) {
+    params.add({'name': 'payerzipcode', 'value': payerZipcode});
+  }
+  if (payerPhone != null) {
+    params.add({'name': 'payerphone', 'value': payerPhone});
+  }
+  if (reuseWallet != null) {
+    params.add({'name': 'reusewallet', 'value': reuseWallet});
+  }
+  if (description != null) {
+    params.add({'name': 'description', 'value': description});
+  }
   if (reference != null) params.add({'name': 'reference', 'value': reference});
 
-  final data = {
-    'op': 'paymentinitialize',
-    'params': params,
-  };
+  final data = {'op': 'paymentinitialize', 'params': params};
   final response = await dio.post(
     url,
     data: data,
@@ -266,4 +285,3 @@ Future<Map<String, dynamic>> recordFiatTransactionPolygonApi({
   }
   return response.data;
 }
-
