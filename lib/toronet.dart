@@ -18,6 +18,11 @@ export 'src/roles/roles.dart';
 export 'src/token/token.dart';
 export 'src/products/products.dart';
 export 'src/virtual/virtual.dart';
+export 'src/solana/solana.dart';
+export 'src/polygon/polygon.dart';
+export 'src/bsc/bsc.dart';
+export 'src/base/base.dart';
+export 'src/arbitrum/arbitrum.dart';
 
 // Configuration
 export 'src/config/network.dart';
