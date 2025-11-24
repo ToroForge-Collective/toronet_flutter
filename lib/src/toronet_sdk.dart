@@ -188,30 +188,21 @@ class ToronetSDK {
         dio: dioInstance,
         baseUrl: finalBaseUrl,
       ),
-          virtualService: VirtualServiceImpl(
-            dio: dioInstance,
-            baseUrl: finalPaymentsUrl,
-          ),
-          solanaService: SolanaServiceImpl(
-            dio: dioInstance,
-            baseUrl: finalBaseUrl,
-          ),
-          polygonService: PolygonServiceImpl(
-            dio: dioInstance,
-            baseUrl: finalBaseUrl,
-          ),
-          bscService: BSCServiceImpl(
-            dio: dioInstance,
-            baseUrl: finalBaseUrl,
-          ),
-          baseService: BaseServiceImpl(
-            dio: dioInstance,
-            baseUrl: finalBaseUrl,
-          ),
-          arbitrumService: ArbitrumServiceImpl(
-            dio: dioInstance,
-            baseUrl: finalBaseUrl,
-          ),
-        );
-      }
+      virtualService: VirtualServiceImpl(
+        dio: dioInstance,
+        baseUrl: finalPaymentsUrl,
+      ),
+      solanaService: SolanaServiceImpl(dio: dioInstance, baseUrl: finalBaseUrl),
+      polygonService: PolygonServiceImpl(
+        dio: dioInstance,
+        baseUrl: finalBaseUrl,
+      ),
+      bscService: BSCServiceImpl(dio: dioInstance, baseUrl: finalBaseUrl),
+      baseService: BaseServiceImpl(dio: dioInstance, baseUrl: finalBaseUrl),
+      arbitrumService: ArbitrumServiceImpl(
+        dio: dioInstance,
+        baseUrl: finalBaseUrl,
+      ),
+    );
+  }
 }

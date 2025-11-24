@@ -658,7 +658,7 @@ main() async {
     // Get exchange rates
     print('\n12.1 Getting exchange rates...');
     final exchangeRates =
-      await sdk.exchangeService.getSupportedAssetsExchangeRates();
+        await sdk.exchangeService.getSupportedAssetsExchangeRates();
     print('✓ Exchange rates: ${exchangeRates.keys.join(", ")}');
   } catch (e) {
     print('✗ Exchange operation error: $e');
