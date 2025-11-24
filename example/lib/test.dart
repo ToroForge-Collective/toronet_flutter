@@ -658,7 +658,7 @@ main() async {
     // Get exchange rates
     print('\n12.1 Getting exchange rates...');
     final exchangeRates =
-        await sdk.exchangeService.getSupportedAssetsExchangeRates();
+      await sdk.exchangeService.getSupportedAssetsExchangeRates();
     print('✓ Exchange rates: ${exchangeRates.keys.join(", ")}');
   } catch (e) {
     print('✗ Exchange operation error: $e');
@@ -707,10 +707,179 @@ main() async {
   }
 
   // ====================================================================
-  // Example 15: Error Handling - Comprehensive
+  // Example 15: Solana Operations
   // ====================================================================
   print('\n═' * 60);
-  print('Example 15: Error Handling');
+  print('Example 15: Solana Operations');
+  print('═' * 60);
+  try {
+    // Validate Solana address
+    print('\n15.1 Validating Solana address...');
+    // final isValid = await sdk.solanaService.isValidSolanaAddress(
+    //   address: '3uwR7HMDuK6dXwZAfx8jHwPcyXsYmFuHWJv3zvJxRE9w',
+    //   admin: adminUser,
+    //   adminpwd: adminPwd,
+    // );
+    // print('✓ Is valid: $isValid');
+
+    // Get SOL balance
+    print('\n15.2 Getting SOL balance (commented - needs address)...');
+    // final solBalance = await sdk.solanaService.getSolBalance(
+    //   address: '3uwR7HMDuK6dXwZAfx8jHwPcyXsYmFuHWJv3zvJxRE9w',
+    //   admin: adminUser,
+    //   adminpwd: adminPwd,
+    // );
+    // print('✓ SOL balance: $solBalance');
+
+    // Bridge token
+    print('\n15.3 Bridging token from Solana (commented - needs setup)...');
+    // final bridgeResult = await sdk.solanaService.bridgeToken(
+    //   from: createdWallet?.address ?? testAddress,
+    //   password: 'password',
+    //   contractAddress: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
+    //   tokenName: 'USDC',
+    //   amount: '3',
+    //   admin: adminUser,
+    //   adminpwd: adminPwd,
+    // );
+    // print('✓ Bridge result: $bridgeResult');
+  } catch (e) {
+    print('✗ Solana operation error: $e');
+  }
+
+  // ====================================================================
+  // Example 16: Polygon Operations
+  // ====================================================================
+  print('\n═' * 60);
+  print('Example 16: Polygon Operations');
+  print('═' * 60);
+  try {
+    // Get Polygon balance
+    print('\n16.1 Getting Polygon balance (commented - needs address)...');
+    // final balance = await sdk.polygonService.getBalance(
+    //   address: testAddress,
+    //   admin: adminUser,
+    //   adminpwd: adminPwd,
+    // );
+    // print('✓ Polygon balance: $balance');
+
+    // Bridge token
+    print('\n16.2 Bridging token from Polygon (commented - needs setup)...');
+    // final bridgeResult = await sdk.polygonService.bridgeToken(
+    //   from: testAddress,
+    //   password: 'password',
+    //   contractAddress: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359',
+    //   tokenName: 'USDC',
+    //   amount: '2',
+    //   admin: adminUser,
+    //   adminpwd: adminPwd,
+    // );
+    // print('✓ Bridge result: $bridgeResult');
+  } catch (e) {
+    print('✗ Polygon operation error: $e');
+  }
+
+  // ====================================================================
+  // Example 17: BSC Operations
+  // ====================================================================
+  print('\n═' * 60);
+  print('Example 17: BSC Operations');
+  print('═' * 60);
+  try {
+    // Get BSC balance
+    print('\n17.1 Getting BSC balance (commented - needs address)...');
+    // final balance = await sdk.bscService.getBalance(
+    //   address: testAddress,
+    //   admin: adminUser,
+    //   adminpwd: adminPwd,
+    // );
+    // print('✓ BSC balance: $balance');
+
+    // Bridge token
+    print('\n17.2 Bridging token from BSC (commented - needs setup)...');
+    // final bridgeResult = await sdk.bscService.bridgeToken(
+    //   from: testAddress,
+    //   password: 'password',
+    //   contractAddress: '0x55d398326f99059ff775485246999027b3197955',
+    //   tokenName: 'USDT',
+    //   amount: '2',
+    //   admin: adminUser,
+    //   adminpwd: adminPwd,
+    // );
+    // print('✓ Bridge result: $bridgeResult');
+  } catch (e) {
+    print('✗ BSC operation error: $e');
+  }
+
+  // ====================================================================
+  // Example 18: Base Operations
+  // ====================================================================
+  print('\n═' * 60);
+  print('Example 18: Base Operations');
+  print('═' * 60);
+  try {
+    // Get Base balance
+    print('\n18.1 Getting Base balance (commented - needs address)...');
+    // final balance = await sdk.baseService.getBalance(
+    //   address: testAddress,
+    //   admin: adminUser,
+    //   adminpwd: adminPwd,
+    // );
+    // print('✓ Base balance: $balance');
+
+    // Bridge token
+    print('\n18.2 Bridging token from Base (commented - needs setup)...');
+    // final bridgeResult = await sdk.baseService.bridgeToken(
+    //   from: testAddress,
+    //   password: 'password',
+    //   contractAddress: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
+    //   tokenName: 'USDC',
+    //   amount: '2',
+    //   admin: adminUser,
+    //   adminpwd: adminPwd,
+    // );
+    // print('✓ Bridge result: $bridgeResult');
+  } catch (e) {
+    print('✗ Base operation error: $e');
+  }
+
+  // ====================================================================
+  // Example 19: Arbitrum Operations
+  // ====================================================================
+  print('\n═' * 60);
+  print('Example 19: Arbitrum Operations');
+  print('═' * 60);
+  try {
+    // Get Arbitrum balance
+    print('\n19.1 Getting Arbitrum balance (commented - needs address)...');
+    // final balance = await sdk.arbitrumService.getBalance(
+    //   address: testAddress,
+    //   admin: adminUser,
+    //   adminpwd: adminPwd,
+    // );
+    // print('✓ Arbitrum balance: $balance');
+
+    // Bridge token
+    print('\n19.2 Bridging token from Arbitrum (commented - needs setup)...');
+    // final bridgeResult = await sdk.arbitrumService.bridgeToken(
+    //   from: testAddress,
+    //   password: 'password',
+    //   contractAddress: '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
+    //   tokenName: 'USDC',
+    //   amount: '2',
+    //   admin: adminUser,
+    //   adminpwd: adminPwd,
+    // );
+    // print('✓ Bridge result: $bridgeResult');
+  } catch (e) {
+    print('✗ Arbitrum operation error: $e');
+  }
+
+  // ====================================================================
+  // Example 20: Error Handling - Comprehensive
+  // ====================================================================
+  print('\n═' * 60);
+  print('Example 20: Error Handling');
   print('═' * 60);
 
   // Validation error
@@ -794,6 +963,11 @@ main() async {
   print('  ✓ Exchange operations');
   print('  ✓ Balance operations');
   print('  ✓ KYC operations');
+  print('  ✓ Solana operations');
+  print('  ✓ Polygon operations');
+  print('  ✓ BSC operations');
+  print('  ✓ Base operations');
+  print('  ✓ Arbitrum operations');
   print('  ✓ Comprehensive error handling');
   print('\nNote: Some operations are commented out as they require');
   print('      admin credentials, valid wallet keys, or specific data.');
