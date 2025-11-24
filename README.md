@@ -1,6 +1,6 @@
 # Toronet Flutter SDK
 
-A comprehensive Dart/Flutter SDK for interacting with the Toronet blockchain and related services. This package provides easy-to-use APIs for wallet management, blockchain operations, currency management, TNS (Toronet Naming System), roles, tokens, payments, products, and virtual wallets.
+A comprehensive Dart/Flutter SDK for interacting with the Toronet blockchain and related services. This package provides easy-to-use APIs for wallet management, blockchain operations, currency management, TNS (Toronet Naming System), roles, tokens, payments, products, virtual wallets, and multi-chain bridge operations across Solana, Polygon, BSC (Binance Smart Chain), Base, and Arbitrum blockchains.
 
 ---
 
