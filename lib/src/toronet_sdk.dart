@@ -15,6 +15,11 @@ import 'roles/roles_service_impl.dart';
 import 'token/token_service_impl.dart';
 import 'products/products_service_impl.dart';
 import 'virtual/virtual_service_impl.dart';
+import 'solana/solana_service_impl.dart';
+import 'polygon/polygon_service_impl.dart';
+import 'bsc/bsc_service_impl.dart';
+import 'base/base_service_impl.dart';
+import 'arbitrum/arbitrum_service_impl.dart';
 
 /// Main entry point for the Toronet SDK.
 ///
@@ -78,6 +83,21 @@ class ToronetSDK {
   /// Virtual wallet operations service
   final VirtualServiceImpl virtualService;
 
+  /// Solana blockchain service
+  final SolanaServiceImpl solanaService;
+
+  /// Polygon blockchain service
+  final PolygonServiceImpl polygonService;
+
+  /// BSC (Binance Smart Chain) blockchain service
+  final BSCServiceImpl bscService;
+
+  /// Base blockchain service
+  final BaseServiceImpl baseService;
+
+  /// Arbitrum blockchain service
+  final ArbitrumServiceImpl arbitrumService;
+
   /// Initialize SDK with network configuration or custom URLs
   ///
   /// [network] - The network to use (mainnet or testnet). If provided, baseUrl and paymentsUrl are ignored unless customBaseUrl/customConnectWUrl are also provided.
@@ -101,6 +121,11 @@ class ToronetSDK {
     required this.tokenService,
     required this.productsService,
     required this.virtualService,
+    required this.solanaService,
+    required this.polygonService,
+    required this.bscService,
+    required this.baseService,
+    required this.arbitrumService,
   });
 
   factory ToronetSDK({
@@ -163,10 +188,30 @@ class ToronetSDK {
         dio: dioInstance,
         baseUrl: finalBaseUrl,
       ),
-      virtualService: VirtualServiceImpl(
-        dio: dioInstance,
-        baseUrl: finalPaymentsUrl,
-      ),
-    );
-  }
+          virtualService: VirtualServiceImpl(
+            dio: dioInstance,
+            baseUrl: finalPaymentsUrl,
+          ),
+          solanaService: SolanaServiceImpl(
+            dio: dioInstance,
+            baseUrl: finalBaseUrl,
+          ),
+          polygonService: PolygonServiceImpl(
+            dio: dioInstance,
+            baseUrl: finalBaseUrl,
+          ),
+          bscService: BSCServiceImpl(
+            dio: dioInstance,
+            baseUrl: finalBaseUrl,
+          ),
+          baseService: BaseServiceImpl(
+            dio: dioInstance,
+            baseUrl: finalBaseUrl,
+          ),
+          arbitrumService: ArbitrumServiceImpl(
+            dio: dioInstance,
+            baseUrl: finalBaseUrl,
+          ),
+        );
+      }
 }
