@@ -687,7 +687,7 @@ class _MyHomePageState extends State<MyHomePage> {
               : SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-          child: Column(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       // Network Status
@@ -701,7 +701,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ),
                       ),
-              const SizedBox(height: 16),
+                      const SizedBox(height: 16),
 
                       // Wallet Operations Section
                       _buildSection(context, 'Wallet Operations', [
@@ -797,13 +797,19 @@ class _MyHomePageState extends State<MyHomePage> {
                       // Solana Operations Section
                       _buildSection(context, 'Solana Operations', [
                         _buildButton('Get SOL Balance', _getSolBalance),
-                        _buildButton('Bridge Token (Solana)', _bridgeTokenSolana),
+                        _buildButton(
+                          'Bridge Token (Solana)',
+                          _bridgeTokenSolana,
+                        ),
                       ]),
 
                       // Polygon Operations Section
                       _buildSection(context, 'Polygon Operations', [
                         _buildButton('Get Polygon Balance', _getPolygonBalance),
-                        _buildButton('Bridge Token (Polygon)', _bridgeTokenPolygon),
+                        _buildButton(
+                          'Bridge Token (Polygon)',
+                          _bridgeTokenPolygon,
+                        ),
                       ]),
 
                       // BSC Operations Section
@@ -820,8 +826,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
                       // Arbitrum Operations Section
                       _buildSection(context, 'Arbitrum Operations', [
-                        _buildButton('Get Arbitrum Balance', _getArbitrumBalance),
-                        _buildButton('Bridge Token (Arbitrum)', _bridgeTokenArbitrum),
+                        _buildButton(
+                          'Get Arbitrum Balance',
+                          _getArbitrumBalance,
+                        ),
+                        _buildButton(
+                          'Bridge Token (Arbitrum)',
+                          _bridgeTokenArbitrum,
+                        ),
                       ]),
 
                       // Error Handling Section
@@ -843,7 +855,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 style: Theme.of(context).textTheme.titleMedium,
                               ),
                               const SizedBox(height: 8),
-              Text(
+                              Text(
                                 _result.isEmpty
                                     ? 'No operation performed yet'
                                     : _result,
@@ -852,11 +864,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             ],
                           ),
                         ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 
