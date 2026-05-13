@@ -4,7 +4,7 @@ Future<Map<String, dynamic>> fetchSupportedAssetsExchangeRates(
   Dio dio,
   String baseUrl,
 ) async {
-  final String url = '$baseUrl/api/query';
+  final String url = '$baseUrl/query';
   final data = {'op': 'getexchangerates', 'params': []};
   final response = await dio.request(
     url,
