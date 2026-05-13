@@ -162,4 +162,112 @@ class BSCServiceImpl implements BSCService {
       adminpwd: adminpwd,
     );
   }
+
+  @override
+  Future<Map<String, dynamic>> getLatestBlock({
+    required String admin,
+    required String adminpwd,
+  }) {
+    return getLatestBlockBscApi(
+      dio: dio,
+      baseUrl: baseUrl,
+      admin: admin,
+      adminpwd: adminpwd,
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> bridgeGasToken({
+    required String from,
+    required String password,
+    required String amount,
+    required String admin,
+    required String adminpwd,
+  }) {
+    return bridgeGasTokenBscApi(
+      dio: dio,
+      baseUrl: baseUrl,
+      from: from,
+      password: password,
+      amount: amount,
+      admin: admin,
+      adminpwd: adminpwd,
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> transferGasToken({
+    required String from,
+    required String to,
+    required String amount,
+    required String password,
+    required String admin,
+    required String adminpwd,
+  }) {
+    return transferGasTokenBscApi(
+      dio: dio,
+      baseUrl: baseUrl,
+      from: from,
+      to: to,
+      amount: amount,
+      password: password,
+      admin: admin,
+      adminpwd: adminpwd,
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> transferToken({
+    required String from,
+    required String to,
+    required String amount,
+    required String password,
+    required String contractAddress,
+    required String tokenName,
+    required String admin,
+    required String adminpwd,
+  }) {
+    return transferTokenBscApi(
+      dio: dio,
+      baseUrl: baseUrl,
+      from: from,
+      to: to,
+      amount: amount,
+      password: password,
+      contractAddress: contractAddress,
+      tokenName: tokenName,
+      admin: admin,
+      adminpwd: adminpwd,
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> updateProjectReserve({
+    required String bscAddress,
+    required String admin,
+    required String adminpwd,
+  }) {
+    return updateProjectBscReserveApi(
+      dio: dio,
+      baseUrl: baseUrl,
+      bscAddress: bscAddress,
+      admin: admin,
+      adminpwd: adminpwd,
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> updateMerchantReserve({
+    required String bscAddress,
+    required String admin,
+    required String adminpwd,
+  }) {
+    return updateMerchantBscReserveApi(
+      dio: dio,
+      baseUrl: baseUrl,
+      bscAddress: bscAddress,
+      admin: admin,
+      adminpwd: adminpwd,
+    );
+  }
 }
