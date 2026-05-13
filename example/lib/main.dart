@@ -635,6 +635,195 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   // ====================================================================
+  // Util Operations
+  // ====================================================================
+  Future<void> _isAddress() async {
+    _setLoading(true);
+    try {
+      final result = await sdk.utilService.isAddress(address: testAddress);
+      _updateResult('isAddress result: $result');
+    } catch (e) {
+      _updateResult('Error checking address: $e');
+    }
+  }
+
+  Future<void> _getTransactionCount() async {
+    _setLoading(true);
+    try {
+      final result = await sdk.utilService.getTransactionCount(
+        address: testAddress,
+      );
+      _updateResult('Transaction count: $result');
+    } catch (e) {
+      _updateResult('Error getting transaction count: $e');
+    }
+  }
+
+  // ====================================================================
+  // Auth Operations
+  // ====================================================================
+  Future<void> _getAuthStatus() async {
+    _setLoading(true);
+    try {
+      final result = await sdk.authService.getAuthStatus(address: testAddress);
+      _updateResult('Auth status: $result');
+    } catch (e) {
+      _updateResult('Error getting auth status: $e');
+    }
+  }
+
+  // ====================================================================
+  // ETH Operations
+  // ====================================================================
+  Future<void> _getEthBalance() async {
+    _setLoading(true);
+    try {
+      final balance = await sdk.ethService.getBalance(
+        address: testAddress,
+        admin: adminUser,
+        adminpwd: adminPwd,
+      );
+      _updateResult('ETH Balance: $balance');
+    } catch (e) {
+      _updateResult('Error getting ETH balance: $e');
+    }
+  }
+
+  Future<void> _updateEthProjectReserve() async {
+    _setLoading(true);
+    try {
+      final result = await sdk.ethService.updateProjectReserve(
+        ethAddress: testAddress,
+        admin: adminUser,
+        adminpwd: adminPwd,
+      );
+      _updateResult('ETH project reserve updated: $result');
+    } catch (e) {
+      _updateResult('Error updating ETH project reserve: $e');
+    }
+  }
+
+  // ====================================================================
+  // AVAX Reserve Operations
+  // ====================================================================
+  Future<void> _updateAvaxProjectReserve() async {
+    _setLoading(true);
+    try {
+      final result = await sdk.avaxService.updateProjectReserve(
+        avaxAddress: testAddress,
+        admin: adminUser,
+        adminpwd: adminPwd,
+      );
+      _updateResult('AVAX project reserve updated: $result');
+    } catch (e) {
+      _updateResult('Error updating AVAX project reserve: $e');
+    }
+  }
+
+  // ====================================================================
+  // Tron Operations
+  // ====================================================================
+  Future<void> _getTronBalance() async {
+    _setLoading(true);
+    try {
+      final balance = await sdk.tronService.getBalance(
+        address: 'TBjkrvhLoh6v7KBuziZs5fL4NqpbCzgXdf',
+        admin: adminUser,
+        adminpwd: adminPwd,
+      );
+      _updateResult('TRX Balance: $balance');
+    } catch (e) {
+      _updateResult('Error getting TRX balance: $e');
+    }
+  }
+
+  Future<void> _isValidTronAddress() async {
+    _setLoading(true);
+    try {
+      final result = await sdk.tronService.isValidTronAddress(
+        address: 'TBjkrvhLoh6v7KBuziZs5fL4NqpbCzgXdf',
+        admin: adminUser,
+        adminpwd: adminPwd,
+      );
+      _updateResult('Valid Tron address: $result');
+    } catch (e) {
+      _updateResult('Error validating Tron address: $e');
+    }
+  }
+
+  // ====================================================================
+  // Smart Contract Operations
+  // ====================================================================
+  Future<void> _signMessage() async {
+    _setLoading(true);
+    try {
+      final result = await sdk.contractService.signMessage(
+        address: testAddress,
+        password: adminPwd,
+        message: 'Hello Toronet',
+      );
+      _updateResult('Signed message: $result');
+    } catch (e) {
+      _updateResult('Error signing message: $e');
+    }
+  }
+
+  Future<void> _callContractFunction() async {
+    _setLoading(true);
+    try {
+      final result = await sdk.contractService.callContractFunction(
+        address: testAddress,
+        password: adminPwd,
+        contractAddress: '0x0000000000000000000000000000000000000000',
+        functionName: 'balanceOf',
+        functionArguments: [testAddress],
+        abi: [
+          {
+            'name': 'balanceOf',
+            'type': 'function',
+            'inputs': [
+              {'name': 'owner', 'type': 'address'},
+            ],
+            'outputs': [
+              {'name': '', 'type': 'uint256'},
+            ],
+          },
+        ],
+      );
+      _updateResult('Contract function result: $result');
+    } catch (e) {
+      _updateResult('Error calling contract function: $e');
+    }
+  }
+
+  // ====================================================================
+  // Contract Deployment
+  // ====================================================================
+  Future<void> _deployContractTestnet() async {
+    _setLoading(true);
+    try {
+      final result = await sdk.deployerService.deployContract(
+        owner: testAddress,
+        abi: [
+          {
+            'inputs': <Map<String, dynamic>>[],
+            'name': 'getValue',
+            'outputs': [
+              {'name': '', 'type': 'uint256'},
+            ],
+            'type': 'function',
+          },
+        ],
+        bytecode: '0x608060405234801561001057600080fd5b50600080fd',
+        constructorArgs: [],
+      );
+      _updateResult('Contract deployed (testnet): $result');
+    } catch (e) {
+      _updateResult('Error deploying contract: $e');
+    }
+  }
+
+  // ====================================================================
   // Error Handling Demo
   // ====================================================================
   Future<void> _demoErrorHandling() async {
@@ -833,6 +1022,63 @@ class _MyHomePageState extends State<MyHomePage> {
                         _buildButton(
                           'Bridge Token (Arbitrum)',
                           _bridgeTokenArbitrum,
+                        ),
+                      ]),
+
+                      // Util Operations Section
+                      _buildSection(context, 'Util Operations', [
+                        _buildButton('Is Valid Address', _isAddress),
+                        _buildButton(
+                          'Get Transaction Count',
+                          _getTransactionCount,
+                        ),
+                      ]),
+
+                      // Auth Operations Section
+                      _buildSection(context, 'Auth Operations', [
+                        _buildButton('Get Auth Status', _getAuthStatus),
+                      ]),
+
+                      // ETH Operations Section
+                      _buildSection(context, 'ETH Operations', [
+                        _buildButton('Get ETH Balance', _getEthBalance),
+                        _buildButton(
+                          'Update ETH Project Reserve',
+                          _updateEthProjectReserve,
+                        ),
+                      ]),
+
+                      // AVAX Reserve Operations Section
+                      _buildSection(context, 'AVAX Reserve Operations', [
+                        _buildButton(
+                          'Update AVAX Project Reserve',
+                          _updateAvaxProjectReserve,
+                        ),
+                      ]),
+
+                      // Tron Operations Section
+                      _buildSection(context, 'Tron (TRX) Operations', [
+                        _buildButton('Get TRX Balance', _getTronBalance),
+                        _buildButton(
+                          'Validate Tron Address',
+                          _isValidTronAddress,
+                        ),
+                      ]),
+
+                      // Smart Contract Operations Section
+                      _buildSection(context, 'Smart Contract Operations', [
+                        _buildButton('Sign Message', _signMessage),
+                        _buildButton(
+                          'Call Contract Function',
+                          _callContractFunction,
+                        ),
+                      ]),
+
+                      // Contract Deployment Section
+                      _buildSection(context, 'Contract Deployment', [
+                        _buildButton(
+                          'Deploy Contract (Testnet)',
+                          _deployContractTestnet,
                         ),
                       ]),
 
