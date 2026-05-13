@@ -4,7 +4,7 @@ import '../exceptions/toro_exceptions.dart';
 // ========== Query Operations (/storage) ==========
 
 Future<bool> isStorageOnApi(Dio dio, String baseUrl) async {
-  final url = '$baseUrl/api/storage';
+  final url = '$baseUrl/storage';
   final data = {'op': 'isstorageon', 'params': []};
   final response = await dio.request(
     url,
@@ -24,7 +24,7 @@ Future<Map<String, dynamic>> getStorageVersionApi(
   Dio dio,
   String baseUrl,
 ) async {
-  final url = '$baseUrl/api/storage';
+  final url = '$baseUrl/storage';
   final data = {'op': 'getstorageversion', 'params': []};
   final response = await dio.request(
     url,
@@ -45,7 +45,7 @@ Future<bool> isContractRegisteredApi(
   String baseUrl,
   String contractAddress,
 ) async {
-  final url = '$baseUrl/api/storage';
+  final url = '$baseUrl/storage';
   final data = {
     'op': 'iscontractregistered',
     'params': [
@@ -67,7 +67,7 @@ Future<bool> isContractRegisteredApi(
 }
 
 Future<bool> isStorageOwnerApi(Dio dio, String baseUrl, String address) async {
-  final url = '$baseUrl/api/storage';
+  final url = '$baseUrl/storage';
   final data = {
     'op': 'isowner',
     'params': [
@@ -89,7 +89,7 @@ Future<bool> isStorageOwnerApi(Dio dio, String baseUrl, String address) async {
 }
 
 Future<Map<String, dynamic>> getStorageOwnerApi(Dio dio, String baseUrl) async {
-  final url = '$baseUrl/api/storage';
+  final url = '$baseUrl/storage';
   final data = {'op': 'getowner', 'params': []};
   final response = await dio.request(
     url,
@@ -113,7 +113,7 @@ Future<Map<String, dynamic>> setStorageOnApi(
   String owner,
   String ownerPassword,
 ) async {
-  final url = '$baseUrl/api/storage/ow';
+  final url = '$baseUrl/storage/ow';
   final data = {
     'op': 'setstorageon',
     'params': [
@@ -134,7 +134,7 @@ Future<Map<String, dynamic>> setStorageOffApi(
   String owner,
   String ownerPassword,
 ) async {
-  final url = '$baseUrl/api/storage/ow';
+  final url = '$baseUrl/storage/ow';
   final data = {
     'op': 'setstorageoff',
     'params': [
@@ -156,7 +156,7 @@ Future<Map<String, dynamic>> registerContractApi(
   String ownerPassword,
   String contractAddress,
 ) async {
-  final url = '$baseUrl/api/storage/ow';
+  final url = '$baseUrl/storage/ow';
   final data = {
     'op': 'registercontract',
     'params': [
@@ -179,7 +179,7 @@ Future<Map<String, dynamic>> unregisterContractApi(
   String ownerPassword,
   String contractAddress,
 ) async {
-  final url = '$baseUrl/api/storage/ow';
+  final url = '$baseUrl/storage/ow';
   final data = {
     'op': 'unregistercontract',
     'params': [
@@ -201,7 +201,7 @@ Future<Map<String, dynamic>> increaseStorageVersionApi(
   String owner,
   String ownerPassword,
 ) async {
-  final url = '$baseUrl/api/storage/ow';
+  final url = '$baseUrl/storage/ow';
   final data = {
     'op': 'increasestorageversion',
     'params': [
@@ -222,7 +222,7 @@ Future<Map<String, dynamic>> decreaseStorageVersionApi(
   String owner,
   String ownerPassword,
 ) async {
-  final url = '$baseUrl/api/storage/ow';
+  final url = '$baseUrl/storage/ow';
   final data = {
     'op': 'decreasestorageversion',
     'params': [
@@ -244,7 +244,7 @@ Future<Map<String, dynamic>> setStorageVersionApi(
   String ownerPassword,
   String version,
 ) async {
-  final url = '$baseUrl/api/storage/ow';
+  final url = '$baseUrl/storage/ow';
   final data = {
     'op': 'setstorageversion',
     'params': [
@@ -267,7 +267,7 @@ Future<Map<String, dynamic>> transferStorageOwnershipApi(
   String ownerPassword,
   String newOwner,
 ) async {
-  final url = '$baseUrl/api/storage/ow';
+  final url = '$baseUrl/storage/ow';
   final data = {
     'op': 'transferownership',
     'params': [
