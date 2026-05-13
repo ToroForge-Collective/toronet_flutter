@@ -36,7 +36,7 @@ Future<bool> isRoleApi(
 ) async {
   final roleStr = _getRoleString(roleType);
   final rolePrefix = _getRolePrefix(roleType);
-  final url = '$baseUrl/api/role/$roleStr';
+  final url = '$baseUrl/role/$roleStr';
   final data = {
     'op': 'is$rolePrefix',
     'params': [
@@ -65,7 +65,7 @@ Future<Map<String, dynamic>> getRoleIndexApi(
 ) async {
   final roleStr = _getRoleString(roleType);
   final rolePrefix = _getRolePrefix(roleType);
-  final url = '$baseUrl/api/role/$roleStr';
+  final url = '$baseUrl/role/$roleStr';
   final data = {
     'op': 'get${rolePrefix}index',
     'params': [
@@ -93,7 +93,7 @@ Future<Map<String, dynamic>> getNumberOfRoleApi(
 ) async {
   final roleStr = _getRoleString(roleType);
   final rolePrefix = _getRolePrefix(roleType);
-  final url = '$baseUrl/api/role/$roleStr';
+  final url = '$baseUrl/role/$roleStr';
   final data = {'op': 'getnumberof$rolePrefix', 'params': []};
   final response = await dio.request(
     url,
@@ -117,7 +117,7 @@ Future<Map<String, dynamic>> getRoleByIndexApi(
 ) async {
   final roleStr = _getRoleString(roleType);
   final rolePrefix = _getRolePrefix(roleType);
-  final url = '$baseUrl/api/role/$roleStr';
+  final url = '$baseUrl/role/$roleStr';
   final data = {
     'op': 'get${rolePrefix}byindex',
     'params': [
@@ -149,7 +149,7 @@ Future<Map<String, dynamic>> initRoleApi(
 ) async {
   final roleStr = _getRoleString(roleType);
   final rolePrefix = _getRolePrefix(roleType);
-  final url = '$baseUrl/api/role/$roleStr/ow';
+  final url = '$baseUrl/role/$roleStr/ow';
   final data = {
     'op': 'init$rolePrefix',
     'params': [
@@ -174,7 +174,7 @@ Future<Map<String, dynamic>> addRoleApi(
 ) async {
   final roleStr = _getRoleString(roleType);
   final rolePrefix = _getRolePrefix(roleType);
-  final url = '$baseUrl/api/role/$roleStr/ow';
+  final url = '$baseUrl/role/$roleStr/ow';
   final data = {
     'op': 'add$rolePrefix',
     'params': [
@@ -200,7 +200,7 @@ Future<Map<String, dynamic>> removeRoleApi(
 ) async {
   final roleStr = _getRoleString(roleType);
   final rolePrefix = _getRolePrefix(roleType);
-  final url = '$baseUrl/api/role/$roleStr/ow';
+  final url = '$baseUrl/role/$roleStr/ow';
   final data = {
     'op': 'remove$rolePrefix',
     'params': [
@@ -225,7 +225,7 @@ Future<Map<String, dynamic>> removeAllRolesApi(
 ) async {
   final roleStr = _getRoleString(roleType);
   final rolePrefix = _getRolePrefix(roleType);
-  final url = '$baseUrl/api/role/$roleStr/ow';
+  final url = '$baseUrl/role/$roleStr/ow';
   final data = {
     'op': 'removeall${rolePrefix}s',
     'params': [
