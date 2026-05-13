@@ -38,7 +38,7 @@ Future<Map<String, dynamic>> confirmDepositApi({
   required String admin,
   required String adminpwd,
 }) async {
-  final url = '$baseUrl/api/payment/toro/';
+  final url = '$baseUrl/payment/toro/';
   final params = [
     {'name': 'currency', 'value': currency},
     {'name': 'txid', 'value': txid},
@@ -68,7 +68,7 @@ Future<List<Map<String, dynamic>>> getBankListUSDApi({
   required Dio dio,
   required String baseUrl,
 }) async {
-  final response = await dio.get('$baseUrl/api/payment/banklist/usd');
+  final response = await dio.get('$baseUrl/payment/banklist/usd');
   if (response.data['result'] == false) {
     throw APIException(response.data['error'] ?? 'Unknown error');
   }
@@ -79,7 +79,7 @@ Future<List<Map<String, dynamic>>> getBankListNGNApi({
   required Dio dio,
   required String baseUrl,
 }) async {
-  final response = await dio.get('$baseUrl/api/payment/banklist/ngn');
+  final response = await dio.get('$baseUrl/payment/banklist/ngn');
   if (response.data['result'] == false) {
     throw APIException(response.data['error'] ?? 'Unknown error');
   }
@@ -115,7 +115,7 @@ Future<Map<String, dynamic>> recordFiatWithdrawalApi({
   required String admin,
   required String adminpwd,
 }) async {
-  final url = '$baseUrl/api/payment/toro/';
+  final url = '$baseUrl/payment/toro/';
   final params = [
     {'name': 'addr', 'value': address},
     {'name': 'pwd', 'value': password},
@@ -168,7 +168,7 @@ Future<Map<String, dynamic>> getFiatWithdrawalByTxidApi({
   required String admin,
   required String adminpwd,
 }) async {
-  final url = '$baseUrl/api/payment/toro/';
+  final url = '$baseUrl/payment/toro/';
   final data = {
     'op': 'getfiatwithdrawals_txid',
     'params': [
@@ -196,7 +196,7 @@ Future<Map<String, dynamic>> verifyBankAccountNameNGNApi({
   required String admin,
   required String adminpwd,
 }) async {
-  final url = '$baseUrl/api/payment/toro/';
+  final url = '$baseUrl/payment/toro/';
   final data = {
     'op': 'verifybankaccountname_ngn',
     'params': [
@@ -231,7 +231,7 @@ Future<Map<String, dynamic>> getFiatTransactionByTxidApi({
   required String admin,
   required String adminpwd,
 }) async {
-  final url = '$baseUrl/api/payment/toro/';
+  final url = '$baseUrl/payment/toro/';
   final data = {
     'op': 'getfiattransactions_txid',
     'params': [
@@ -261,7 +261,7 @@ Future<List<Map<String, dynamic>>> getPendingTransactionApi({
   required String admin,
   required String adminpwd,
 }) async {
-  final url = '$baseUrl/api/payment/toro/';
+  final url = '$baseUrl/payment/toro/';
   final data = {'op': 'getpendingtransaction', 'params': []};
   final response = await dio.post(
     url,
@@ -289,7 +289,7 @@ Future<List<Map<String, dynamic>>> getFiatTransactionsAddressRangeApi({
   required String admin,
   required String adminpwd,
 }) async {
-  final url = '$baseUrl/api/payment/toro/';
+  final url = '$baseUrl/payment/toro/';
   final data = {
     'op': 'getfiattransactions_address_range',
     'params': [
@@ -324,7 +324,7 @@ Future<List<Map<String, dynamic>>> getFiatWithdrawalsAddressRangeApi({
   required String admin,
   required String adminpwd,
 }) async {
-  final url = '$baseUrl/api/payment/toro/';
+  final url = '$baseUrl/payment/toro/';
   final data = {
     'op': 'getfiatwithdrawals_address_range',
     'params': [
@@ -361,7 +361,7 @@ Future<List<Map<String, dynamic>>> getFiatTransactionsRecorderRangeApi({
   required String admin,
   required String adminpwd,
 }) async {
-  final url = '$baseUrl/api/payment/toro/';
+  final url = '$baseUrl/payment/toro/';
   final params = [
     {'name': 'addr', 'value': address},
     {'name': 'startdate', 'value': startDate},
@@ -402,7 +402,7 @@ Future<List<Map<String, dynamic>>> getFiatWithdrawalsRecorderRangeApi({
   required String admin,
   required String adminpwd,
 }) async {
-  final url = '$baseUrl/api/payment/toro/';
+  final url = '$baseUrl/payment/toro/';
   final params = [
     {'name': 'addr', 'value': address},
     {'name': 'startdate', 'value': startDate},
