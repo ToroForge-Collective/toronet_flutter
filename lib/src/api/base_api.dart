@@ -285,3 +285,213 @@ Future<Map<String, dynamic>> recordFiatTransactionBaseApi({
   }
   return response.data;
 }
+
+// ========== New Operations (added from Postman) ==========
+
+Future<Map<String, dynamic>> getLatestBlockBaseApi({
+  required Dio dio,
+  required String baseUrl,
+  required String admin,
+  required String adminpwd,
+}) async {
+  final url = '$baseUrl/cryptoutils/';
+  final data = {
+    'op': 'get_latest_block',
+    'params': [
+      {'name': 'network', 'value': 'base'},
+    ],
+  };
+  final response = await dio.post(
+    url,
+    data: data,
+    options: Options(
+      headers: {
+        'admin': admin,
+        'adminpwd': adminpwd,
+        'Content-Type': 'application/json',
+      },
+    ),
+  );
+  if (response.data['result'] == false) {
+    throw APIException(response.data['error'] ?? 'Unknown error');
+  }
+  return response.data;
+}
+
+Future<Map<String, dynamic>> bridgeGasTokenBaseApi({
+  required Dio dio,
+  required String baseUrl,
+  required String from,
+  required String password,
+  required String amount,
+  required String admin,
+  required String adminpwd,
+}) async {
+  final url = '$baseUrl/cryptoutils/';
+  final data = {
+    'op': 'bridge_gas_token',
+    'params': [
+      {'name': 'from', 'value': from},
+      {'name': 'pwd', 'value': password},
+      {'name': 'network', 'value': 'base'},
+      {'name': 'amount', 'value': amount},
+    ],
+  };
+  final response = await dio.post(
+    url,
+    data: data,
+    options: Options(
+      headers: {
+        'admin': admin,
+        'adminpwd': adminpwd,
+        'Content-Type': 'application/json',
+      },
+    ),
+  );
+  if (response.data['result'] == false) {
+    throw APIException(response.data['error'] ?? 'Unknown error');
+  }
+  return response.data;
+}
+
+Future<Map<String, dynamic>> transferGasTokenBaseApi({
+  required Dio dio,
+  required String baseUrl,
+  required String from,
+  required String to,
+  required String amount,
+  required String password,
+  required String admin,
+  required String adminpwd,
+}) async {
+  final url = '$baseUrl/cryptoutils/';
+  final data = {
+    'op': 'transfer_gas_token',
+    'params': [
+      {'name': 'from', 'value': from},
+      {'name': 'to', 'value': to},
+      {'name': 'amount', 'value': amount},
+      {'name': 'pwd', 'value': password},
+      {'name': 'network', 'value': 'base'},
+    ],
+  };
+  final response = await dio.post(
+    url,
+    data: data,
+    options: Options(
+      headers: {
+        'admin': admin,
+        'adminpwd': adminpwd,
+        'Content-Type': 'application/json',
+      },
+    ),
+  );
+  if (response.data['result'] == false) {
+    throw APIException(response.data['error'] ?? 'Unknown error');
+  }
+  return response.data;
+}
+
+Future<Map<String, dynamic>> transferTokenBaseApi({
+  required Dio dio,
+  required String baseUrl,
+  required String from,
+  required String to,
+  required String amount,
+  required String password,
+  required String contractAddress,
+  required String tokenName,
+  required String admin,
+  required String adminpwd,
+}) async {
+  final url = '$baseUrl/cryptoutils/';
+  final data = {
+    'op': 'transfer_token',
+    'params': [
+      {'name': 'from', 'value': from},
+      {'name': 'to', 'value': to},
+      {'name': 'amount', 'value': amount},
+      {'name': 'pwd', 'value': password},
+      {'name': 'network', 'value': 'base'},
+      {'name': 'contractaddress', 'value': contractAddress},
+      {'name': 'tokenname', 'value': tokenName},
+    ],
+  };
+  final response = await dio.post(
+    url,
+    data: data,
+    options: Options(
+      headers: {
+        'admin': admin,
+        'adminpwd': adminpwd,
+        'Content-Type': 'application/json',
+      },
+    ),
+  );
+  if (response.data['result'] == false) {
+    throw APIException(response.data['error'] ?? 'Unknown error');
+  }
+  return response.data;
+}
+
+Future<Map<String, dynamic>> updateProjectBaseReserveApi({
+  required Dio dio,
+  required String baseUrl,
+  required String baseAddress,
+  required String admin,
+  required String adminpwd,
+}) async {
+  final url = '$baseUrl/cryptoutils/';
+  final data = {
+    'op': 'updateproject_basereserve',
+    'params': [
+      {'name': 'baseaddress', 'value': baseAddress},
+    ],
+  };
+  final response = await dio.post(
+    url,
+    data: data,
+    options: Options(
+      headers: {
+        'admin': admin,
+        'adminpwd': adminpwd,
+        'Content-Type': 'application/json',
+      },
+    ),
+  );
+  if (response.data['result'] == false) {
+    throw APIException(response.data['error'] ?? 'Unknown error');
+  }
+  return response.data;
+}
+
+Future<Map<String, dynamic>> updateMerchantBaseReserveApi({
+  required Dio dio,
+  required String baseUrl,
+  required String baseAddress,
+  required String admin,
+  required String adminpwd,
+}) async {
+  final url = '$baseUrl/cryptoutils/';
+  final data = {
+    'op': 'updatemerchant_basereserve',
+    'params': [
+      {'name': 'baseaddress', 'value': baseAddress},
+    ],
+  };
+  final response = await dio.post(
+    url,
+    data: data,
+    options: Options(
+      headers: {
+        'admin': admin,
+        'adminpwd': adminpwd,
+        'Content-Type': 'application/json',
+      },
+    ),
+  );
+  if (response.data['result'] == false) {
+    throw APIException(response.data['error'] ?? 'Unknown error');
+  }
+  return response.data;
+}
