@@ -20,6 +20,14 @@ import 'polygon/polygon_service_impl.dart';
 import 'bsc/bsc_service_impl.dart';
 import 'base/base_service_impl.dart';
 import 'arbitrum/arbitrum_service_impl.dart';
+import 'util/util_service_impl.dart';
+import 'raw/raw_service_impl.dart';
+import 'auth/auth_service_impl.dart';
+import 'eth/eth_service_impl.dart';
+import 'avax/avax_service_impl.dart';
+import 'tron/tron_service_impl.dart';
+import 'contract/contract_service_impl.dart';
+import 'deployer/deployer_service_impl.dart';
 
 /// Main entry point for the Toronet SDK.
 ///
@@ -98,6 +106,33 @@ class ToronetSDK {
   /// Arbitrum blockchain service
   final ArbitrumServiceImpl arbitrumService;
 
+  /// Utility service (address validation, transaction count)
+  final UtilServiceImpl utilService;
+
+  /// Raw data service (send raw transactions)
+  final RawServiceImpl rawService;
+
+  /// Authentication service
+  final AuthServiceImpl authService;
+
+  /// Ethereum blockchain service
+  final EthServiceImpl ethService;
+
+  /// Avalanche reserve management service
+  final AvaxServiceImpl avaxService;
+
+  /// Tron blockchain service
+  final TronServiceImpl tronService;
+
+  /// Smart contract interaction service (sign, call functions)
+  final ContractServiceImpl contractService;
+
+  /// Smart contract deployment service
+  final DeployerServiceImpl deployerService;
+
+  /// Deployer service URL
+  final String deployerUrl;
+
   /// Initialize SDK with network configuration or custom URLs
   ///
   /// [network] - The network to use (mainnet or testnet). If provided, baseUrl and paymentsUrl are ignored unless customBaseUrl/customConnectWUrl are also provided.
@@ -105,6 +140,7 @@ class ToronetSDK {
   /// [paymentsUrl] - Custom ConnectW payments URL (backward compatible)
   /// [customBaseUrl] - Override base URL even when network is specified
   /// [customConnectWUrl] - Override ConnectW URL even when network is specified
+  /// [customDeployerUrl] - Override deployer URL
   /// [dio] - Optional Dio instance for HTTP requests
   ToronetSDK._({
     required this.walletService,
@@ -126,6 +162,15 @@ class ToronetSDK {
     required this.bscService,
     required this.baseService,
     required this.arbitrumService,
+    required this.utilService,
+    required this.rawService,
+    required this.authService,
+    required this.ethService,
+    required this.avaxService,
+    required this.tronService,
+    required this.contractService,
+    required this.deployerService,
+    required this.deployerUrl,
   });
 
   factory ToronetSDK({
@@ -134,6 +179,7 @@ class ToronetSDK {
     String? paymentsUrl,
     String? customBaseUrl,
     String? customConnectWUrl,
+    String? customDeployerUrl,
     Dio? dio,
   }) {
     // Initialize SDK config
@@ -143,14 +189,18 @@ class ToronetSDK {
         network: network,
         customBaseUrl: customBaseUrl ?? baseUrl,
         customConnectWUrl: customConnectWUrl ?? paymentsUrl,
+        customDeployerUrl: customDeployerUrl,
       );
     } else if (baseUrl != null || paymentsUrl != null) {
       // Backward compatibility: if baseUrl/paymentsUrl provided, use them
       config.initialize(customBaseUrl: baseUrl, customConnectWUrl: paymentsUrl);
+    } else if (customDeployerUrl != null) {
+      config.initialize(customDeployerUrl: customDeployerUrl);
     }
 
     final finalBaseUrl = config.getBaseURL();
     final finalPaymentsUrl = config.getConnectWURL();
+    final finalDeployerUrl = config.getDeployerURL();
     final dioInstance = dio ?? Dio();
 
     return ToronetSDK._(
@@ -203,6 +253,22 @@ class ToronetSDK {
         dio: dioInstance,
         baseUrl: finalBaseUrl,
       ),
+      utilService: UtilServiceImpl(dio: dioInstance, baseUrl: finalBaseUrl),
+      rawService: RawServiceImpl(dio: dioInstance, baseUrl: finalBaseUrl),
+      authService: AuthServiceImpl(dio: dioInstance, baseUrl: finalBaseUrl),
+      ethService: EthServiceImpl(dio: dioInstance, baseUrl: finalBaseUrl),
+      avaxService: AvaxServiceImpl(dio: dioInstance, baseUrl: finalBaseUrl),
+      tronService: TronServiceImpl(dio: dioInstance, baseUrl: finalBaseUrl),
+      contractService: ContractServiceImpl(
+        dio: dioInstance,
+        baseUrl: finalBaseUrl,
+      ),
+      deployerService: DeployerServiceImpl(
+        dio: dioInstance,
+        deployerUrl: finalDeployerUrl,
+        network: config.getNetwork(),
+      ),
+      deployerUrl: finalDeployerUrl,
     );
   }
 }
