@@ -10,7 +10,7 @@ Future<bool> performKYCForCustomerApi(
   String baseUrl,
   KycParams params,
 ) async {
-  final String url = '$baseUrl/api/payment/toro/';
+  final String url = '$baseUrl/payment/toro/';
   final data = {
     'op': 'check_kyc',
     'params': [
@@ -45,7 +45,7 @@ Future<bool> isAddressKYCVerifiedApi(
   String baseUrl,
   String address,
 ) async {
-  final String url = '$CONNECTW_URL/api/verified/check-kyc';
+  final String url = '$CONNECTW_URL/verified/check-kyc';
   final data = {'address': address};
   final response = await dio.post(url, data: data);
   //  print("Response: ${response.data}");
