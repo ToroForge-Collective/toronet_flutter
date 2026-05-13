@@ -87,4 +87,48 @@ abstract class PolygonService {
     required String admin,
     required String adminpwd,
   });
+  Future<Map<String, dynamic>> getLatestBlock({
+    required String admin,
+    required String adminpwd,
+  });
+
+  Future<Map<String, dynamic>> bridgeGasToken({
+    required String from,
+    required String password,
+    required String amount,
+    required String admin,
+    required String adminpwd,
+  });
+
+  Future<Map<String, dynamic>> transferGasToken({
+    required String from,
+    required String to,
+    required String amount,
+    required String password,
+    required String admin,
+    required String adminpwd,
+  });
+
+  Future<Map<String, dynamic>> transferToken({
+    required String from,
+    required String to,
+    required String amount,
+    required String password,
+    required String contractAddress,
+    required String tokenName,
+    required String admin,
+    required String adminpwd,
+  });
+
+  Future<Map<String, dynamic>> updateProjectReserve({
+    required String polyAddress,
+    required String admin,
+    required String adminpwd,
+  });
+
+  Future<Map<String, dynamic>> updateMerchantReserve({
+    required String polyAddress,
+    required String admin,
+    required String adminpwd,
+  });
 }
