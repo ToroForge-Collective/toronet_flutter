@@ -6,7 +6,7 @@ Future<Map<String, dynamic>> getEventApi(
   String baseUrl,
   String hash,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'getevent',
     'params': [
@@ -32,7 +32,7 @@ Future<List<Map<String, dynamic>>> getBlocksApi(
   String baseUrl,
   int count,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'getblocks',
     'params': [
@@ -58,7 +58,7 @@ Future<List<Map<String, dynamic>>> getTransactionsApi(
   String baseUrl,
   int count,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'gettransactions',
     'params': [
@@ -85,7 +85,7 @@ Future<List<Map<String, dynamic>>> getAddrTransactionsApi(
   String addr,
   int count,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'getaddrtransactions',
     'params': [
@@ -112,7 +112,7 @@ Future<List<Map<String, dynamic>>> getTransactionsToroApi(
   String baseUrl,
   int count,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'gettransactions_toro',
     'params': [
@@ -139,7 +139,7 @@ Future<List<Map<String, dynamic>>> getAddrTransactionsToroApi(
   String addr,
   int count,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'getaddrtransactions_toro',
     'params': [
@@ -166,7 +166,7 @@ Future<List<Map<String, dynamic>>> getTransactionsDollarApi(
   String baseUrl,
   int count,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'gettransactions_dollar',
     'params': [
@@ -193,7 +193,7 @@ Future<List<Map<String, dynamic>>> getAddrTransactionsDollarApi(
   String addr,
   int count,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'getaddrtransactions_dollar',
     'params': [
@@ -219,7 +219,7 @@ Future<Map<String, dynamic>> getExchangeRatesApi(
   Dio dio,
   String baseUrl,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {'op': 'getexchangerates', 'params': []};
   final response = await dio.request(
     url,
@@ -240,7 +240,7 @@ Future<Map<String, dynamic>> getAddrRoleApi(
   String baseUrl,
   String addr,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'getaddrrole',
     'params': [
@@ -266,7 +266,7 @@ Future<Map<String, dynamic>> getAddrBalanceApi(
   String baseUrl,
   String addr,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'getaddrbalance',
     'params': [
@@ -292,7 +292,7 @@ Future<Map<String, dynamic>> getBlockApi(
   String baseUrl,
   String blockId,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'getblock',
     'params': [
@@ -318,7 +318,7 @@ Future<Map<String, dynamic>> getTransactionByIdApi(
   String baseUrl,
   String hash,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'gettransaction',
     'params': [
@@ -344,7 +344,7 @@ Future<Map<String, dynamic>> getReceiptApi(
   String baseUrl,
   String hash,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'getreceipt',
     'params': [
@@ -370,7 +370,7 @@ Future<List<Map<String, dynamic>>> getTransactionsNairaApi(
   String baseUrl,
   int count,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'gettransactions_naira',
     'params': [
@@ -397,7 +397,7 @@ Future<List<Map<String, dynamic>>> getAddrTransactionsNairaApi(
   String addr,
   int count,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'getaddrtransactions_naira',
     'params': [
@@ -424,7 +424,7 @@ Future<List<Map<String, dynamic>>> getTransactionsEuroApi(
   String baseUrl,
   int count,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'gettransactions_euro',
     'params': [
@@ -451,7 +451,7 @@ Future<List<Map<String, dynamic>>> getAddrTransactionsEuroApi(
   String addr,
   int count,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'getaddrtransactions_euro',
     'params': [
@@ -478,7 +478,7 @@ Future<List<Map<String, dynamic>>> getTransactionsPoundApi(
   String baseUrl,
   int count,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'gettransactions_pound',
     'params': [
@@ -505,7 +505,7 @@ Future<List<Map<String, dynamic>>> getAddrTransactionsPoundApi(
   String addr,
   int count,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'getaddrtransactions_pound',
     'params': [
@@ -532,7 +532,7 @@ Future<List<Map<String, dynamic>>> getTransactionsEgpApi(
   String baseUrl,
   int count,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'gettransactions_egp',
     'params': [
@@ -559,7 +559,7 @@ Future<List<Map<String, dynamic>>> getAddrTransactionsEgpApi(
   String addr,
   int count,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'getaddrtransactions_egp',
     'params': [
@@ -586,7 +586,7 @@ Future<List<Map<String, dynamic>>> getTransactionsKshApi(
   String baseUrl,
   int count,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'gettransactions_ksh',
     'params': [
@@ -613,7 +613,7 @@ Future<List<Map<String, dynamic>>> getAddrTransactionsKshApi(
   String addr,
   int count,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'getaddrtransactions_ksh',
     'params': [
@@ -640,7 +640,7 @@ Future<List<Map<String, dynamic>>> getTransactionsZarApi(
   String baseUrl,
   int count,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'gettransactions_zar',
     'params': [
@@ -667,7 +667,7 @@ Future<List<Map<String, dynamic>>> getAddrTransactionsZarApi(
   String addr,
   int count,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'getaddrtransactions_zar',
     'params': [
@@ -694,7 +694,7 @@ Future<List<Map<String, dynamic>>> getTransactionsEthApi(
   String baseUrl,
   int count,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'gettransactions_eth',
     'params': [
@@ -721,7 +721,7 @@ Future<List<Map<String, dynamic>>> getAddrTransactionsEthApi(
   String addr,
   int count,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'getaddrtransactions_eth',
     'params': [
@@ -750,7 +750,7 @@ Future<List<Map<String, dynamic>>> getTransactionsRangeApi(
   String endDate,
   int count,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final data = {
     'op': 'gettransactionsrange',
     'params': [
@@ -782,7 +782,7 @@ Future<List<Map<String, dynamic>>> getAddrTransactionsRangeApi(
   String? token,
   int count,
 ) async {
-  final url = '$baseUrl/api/query';
+  final url = '$baseUrl/query';
   final params = [
     {'name': 'addr', 'value': addr},
     {'name': 'startdate', 'value': startDate},
