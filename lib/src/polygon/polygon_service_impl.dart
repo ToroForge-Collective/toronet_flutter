@@ -162,4 +162,112 @@ class PolygonServiceImpl implements PolygonService {
       adminpwd: adminpwd,
     );
   }
+
+  @override
+  Future<Map<String, dynamic>> getLatestBlock({
+    required String admin,
+    required String adminpwd,
+  }) {
+    return getLatestBlockPolygonApi(
+      dio: dio,
+      baseUrl: baseUrl,
+      admin: admin,
+      adminpwd: adminpwd,
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> bridgeGasToken({
+    required String from,
+    required String password,
+    required String amount,
+    required String admin,
+    required String adminpwd,
+  }) {
+    return bridgeGasTokenPolygonApi(
+      dio: dio,
+      baseUrl: baseUrl,
+      from: from,
+      password: password,
+      amount: amount,
+      admin: admin,
+      adminpwd: adminpwd,
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> transferGasToken({
+    required String from,
+    required String to,
+    required String amount,
+    required String password,
+    required String admin,
+    required String adminpwd,
+  }) {
+    return transferGasTokenPolygonApi(
+      dio: dio,
+      baseUrl: baseUrl,
+      from: from,
+      to: to,
+      amount: amount,
+      password: password,
+      admin: admin,
+      adminpwd: adminpwd,
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> transferToken({
+    required String from,
+    required String to,
+    required String amount,
+    required String password,
+    required String contractAddress,
+    required String tokenName,
+    required String admin,
+    required String adminpwd,
+  }) {
+    return transferTokenPolygonApi(
+      dio: dio,
+      baseUrl: baseUrl,
+      from: from,
+      to: to,
+      amount: amount,
+      password: password,
+      contractAddress: contractAddress,
+      tokenName: tokenName,
+      admin: admin,
+      adminpwd: adminpwd,
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> updateProjectReserve({
+    required String polyAddress,
+    required String admin,
+    required String adminpwd,
+  }) {
+    return updateProjectPolygonReserveApi(
+      dio: dio,
+      baseUrl: baseUrl,
+      polyAddress: polyAddress,
+      admin: admin,
+      adminpwd: adminpwd,
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> updateMerchantReserve({
+    required String polyAddress,
+    required String admin,
+    required String adminpwd,
+  }) {
+    return updateMerchantPolygonReserveApi(
+      dio: dio,
+      baseUrl: baseUrl,
+      polyAddress: polyAddress,
+      admin: admin,
+      adminpwd: adminpwd,
+    );
+  }
 }
