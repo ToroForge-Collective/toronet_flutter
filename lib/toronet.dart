@@ -23,6 +23,14 @@ export 'src/polygon/polygon.dart';
 export 'src/bsc/bsc.dart';
 export 'src/base/base.dart';
 export 'src/arbitrum/arbitrum.dart';
+export 'src/util/util.dart';
+export 'src/raw/raw.dart';
+export 'src/auth/auth.dart';
+export 'src/eth/eth.dart';
+export 'src/avax/avax.dart';
+export 'src/tron/tron.dart';
+export 'src/contract/contract.dart';
+export 'src/deployer/deployer.dart';
 
 // Configuration
 export 'src/config/network.dart';
