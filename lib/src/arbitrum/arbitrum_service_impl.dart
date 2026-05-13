@@ -162,4 +162,112 @@ class ArbitrumServiceImpl implements ArbitrumService {
       adminpwd: adminpwd,
     );
   }
+
+  @override
+  Future<Map<String, dynamic>> getLatestBlock({
+    required String admin,
+    required String adminpwd,
+  }) {
+    return getLatestBlockArbitrumApi(
+      dio: dio,
+      baseUrl: baseUrl,
+      admin: admin,
+      adminpwd: adminpwd,
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> bridgeGasToken({
+    required String from,
+    required String password,
+    required String amount,
+    required String admin,
+    required String adminpwd,
+  }) {
+    return bridgeGasTokenArbitrumApi(
+      dio: dio,
+      baseUrl: baseUrl,
+      from: from,
+      password: password,
+      amount: amount,
+      admin: admin,
+      adminpwd: adminpwd,
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> transferGasToken({
+    required String from,
+    required String to,
+    required String amount,
+    required String password,
+    required String admin,
+    required String adminpwd,
+  }) {
+    return transferGasTokenArbitrumApi(
+      dio: dio,
+      baseUrl: baseUrl,
+      from: from,
+      to: to,
+      amount: amount,
+      password: password,
+      admin: admin,
+      adminpwd: adminpwd,
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> transferToken({
+    required String from,
+    required String to,
+    required String amount,
+    required String password,
+    required String contractAddress,
+    required String tokenName,
+    required String admin,
+    required String adminpwd,
+  }) {
+    return transferTokenArbitrumApi(
+      dio: dio,
+      baseUrl: baseUrl,
+      from: from,
+      to: to,
+      amount: amount,
+      password: password,
+      contractAddress: contractAddress,
+      tokenName: tokenName,
+      admin: admin,
+      adminpwd: adminpwd,
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> updateProjectReserve({
+    required String arbAddress,
+    required String admin,
+    required String adminpwd,
+  }) {
+    return updateProjectArbitrumReserveApi(
+      dio: dio,
+      baseUrl: baseUrl,
+      arbAddress: arbAddress,
+      admin: admin,
+      adminpwd: adminpwd,
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> updateMerchantReserve({
+    required String arbAddress,
+    required String admin,
+    required String adminpwd,
+  }) {
+    return updateMerchantArbitrumReserveApi(
+      dio: dio,
+      baseUrl: baseUrl,
+      arbAddress: arbAddress,
+      admin: admin,
+      adminpwd: adminpwd,
+    );
+  }
 }
