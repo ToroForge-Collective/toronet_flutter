@@ -6,7 +6,7 @@ Future<Map<String, dynamic>> createWalletApi(
   String baseUrl,
   String password,
 ) async {
-  final String url = '$baseUrl/api/keystore';
+  final String url = '$baseUrl/keystore';
   final data = {
     'op': 'createkey',
     'params': [
@@ -23,7 +23,7 @@ Future<Map<String, dynamic>> importWalletFromPrivateKeyApi(
   String privateKey,
   String password,
 ) async {
-  final String url = '$baseUrl/api/keystore';
+  final String url = '$baseUrl/keystore';
   final data = {
     'op': 'importkey',
     'params': [
@@ -44,7 +44,7 @@ Future<bool> verifyWalletPasswordApi(
   String address,
   String password,
 ) async {
-  final String url = '$baseUrl/api/keystore';
+  final String url = '$baseUrl/keystore';
   final data = {
     'op': 'verifykey',
     'params': [
@@ -66,7 +66,7 @@ Future<Map<String, dynamic>> getWalletKeyApi(
   String address,
   String password,
 ) async {
-  final String url = '$baseUrl/api/keystore';
+  final String url = '$baseUrl/keystore';
   final data = {
     'op': 'getkey',
     'params': [
@@ -90,7 +90,7 @@ Future<Map<String, dynamic>> getWalletKeyApi(
 }
 
 Future<bool> isTNSAvailableApi(Dio dio, String baseUrl, String username) async {
-  final String url = '$baseUrl/api/tns';
+  final String url = '$baseUrl/tns';
   final data = {
     'op': 'isnameused',
     'params': [
@@ -120,7 +120,7 @@ Future<void> configureTNSApi(
   String password,
   String username,
 ) async {
-  final String url = '$baseUrl/api/tns/cl';
+  final String url = '$baseUrl/tns/cl';
   final data = {
     'op': 'setname',
     'params': [
@@ -143,7 +143,7 @@ Future<void> updateWalletPasswordApi(
   String oldPassword,
   String newPassword,
 ) async {
-  final String url = '$baseUrl/api/keystore';
+  final String url = '$baseUrl/keystore';
   final data = {
     'op': 'updatekeypwd',
     'params': [
@@ -164,7 +164,7 @@ Future<void> deleteWalletApi(
   String address,
   String password,
 ) async {
-  final String url = '$baseUrl/api/keystore';
+  final String url = '$baseUrl/keystore';
   final data = {
     'op': 'deletekey',
     'params': [
