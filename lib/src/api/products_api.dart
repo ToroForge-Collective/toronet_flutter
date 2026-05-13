@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import '../exceptions/toro_exceptions.dart';
 
 Future<Map<String, dynamic>> getProjectInfoApi(Dio dio, String baseUrl) async {
-  final url = '$baseUrl/api/product';
+  final url = '$baseUrl/product';
   final data = {'op': 'getprojectinfo', 'params': []};
   final response = await dio.request(
     url,
@@ -23,7 +23,7 @@ Future<Map<String, dynamic>> getProductApi(
   String baseUrl,
   String productId,
 ) async {
-  final url = '$baseUrl/api/product';
+  final url = '$baseUrl/product';
   final data = {
     'op': 'getproduct',
     'params': [
@@ -51,7 +51,7 @@ Future<Map<String, dynamic>> recordProductApi(
   String admin,
   String adminPassword,
 ) async {
-  final url = '$baseUrl/api/product';
+  final url = '$baseUrl/product';
   final params = [
     ...productData.entries.map(
       (e) => {'name': e.key, 'value': e.value.toString()},
@@ -83,7 +83,7 @@ Future<Map<String, dynamic>> updateProductApi(
   String admin,
   String adminPassword,
 ) async {
-  final url = '$baseUrl/api/product';
+  final url = '$baseUrl/product';
   final params = [
     {'name': 'id', 'value': productId},
     ...productData.entries.map(
