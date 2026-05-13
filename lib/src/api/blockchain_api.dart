@@ -4,7 +4,7 @@ Future<Map<String, dynamic>> fetchBlockchainStatus(
   Dio dio,
   String baseUrl,
 ) async {
-  final String url = '$baseUrl/api/blockchain';
+  final String url = '$baseUrl/blockchain';
 
   final response = await dio.request(
     url,
@@ -21,7 +21,7 @@ Future<Map<String, dynamic>> fetchLatestBlockData(
   Dio dio,
   String baseUrl,
 ) async {
-  final String url = '$baseUrl/api/blockchain';
+  final String url = '$baseUrl/blockchain';
   final data = {
     'op': 'getblock',
     'params': [
@@ -45,7 +45,7 @@ Future<Map<String, dynamic>> getTransaction(
   String baseUrl,
   String transactionId,
 ) async {
-  final String url = '$baseUrl/api/blockchain';
+  final String url = '$baseUrl/blockchain';
   final data = {
     'op': 'gettransaction',
     'params': [
@@ -69,7 +69,7 @@ Future<Map<String, dynamic>> getReceipt(
   String baseUrl,
   String transactionId,
 ) async {
-  final String url = '$baseUrl/api/blockchain';
+  final String url = '$baseUrl/blockchain';
   final data = {
     'op': 'getreceipt',
     'params': [
@@ -93,7 +93,7 @@ Future<Map<String, dynamic>> getRevertReason(
   String baseUrl,
   String transactionId,
 ) async {
-  final String url = '$baseUrl/api/blockchain';
+  final String url = '$baseUrl/blockchain';
   final data = {
     'op': 'getrevertreason',
     'params': [
