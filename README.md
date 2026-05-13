@@ -1,6 +1,40 @@
 # Toronet Flutter SDK
 
-A comprehensive Dart/Flutter SDK for interacting with the Toronet blockchain and related services. This package provides easy-to-use APIs for wallet management, blockchain operations, currency management, TNS (Toronet Naming System), roles, tokens, payments, products, virtual wallets, and multi-chain bridge operations across Solana, Polygon, BSC (Binance Smart Chain), Base, and Arbitrum blockchains.
+A comprehensive Dart/Flutter SDK for interacting with the Toronet blockchain and related services. This package provides easy-to-use APIs for wallet management, blockchain operations, currency management, TNS (Toronet Naming System), roles, tokens, payments, products, virtual wallets, storage, authentication, smart contract interactions, contract deployment, and multi-chain bridge operations across Ethereum, Solana, Tron, Polygon, BSC, Base, Arbitrum, and Avalanche.
+
+---
+
+## Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Getting Started](#getting-started)
+- [Usage Examples](#usage-examples)
+  - [Wallet Management](#wallet-management)
+  - [Query Operations](#query-operations)
+  - [Currency Operations](#currency-operations)
+  - [TNS Operations](#tns-toronet-naming-system-operations)
+  - [Role Management](#role-management)
+  - [Token Operations](#token-operations)
+  - [Payment Operations](#payment-operations)
+  - [Virtual Wallet Operations](#virtual-wallet-operations)
+  - [Product Operations](#product-operations)
+  - [Multi-Chain Bridge Operations](#multi-chain-bridge-operations)
+    - [Solana](#solana-operations)
+    - [Polygon](#polygon-operations)
+    - [BSC](#bsc-operations)
+    - [Base](#base-operations)
+    - [Arbitrum](#arbitrum-operations)
+    - [ETH](#eth-operations)
+    - [AVAX](#avax-reserve-operations)
+    - [Tron](#tron-trx-operations)
+  - [Utility, Raw & Auth](#utility-raw--auth-operations)
+  - [Storage](#storage-operations)
+  - [Smart Contract Operations](#smart-contract-operations)
+  - [Contract Deployment](#contract-deployment)
+- [Network Configuration](#network-configuration)
+- [Error Handling](#error-handling)
+- [API Reference](#api-reference)
 
 ---
 
@@ -25,10 +59,21 @@ A comprehensive Dart/Flutter SDK for interacting with the Toronet blockchain and
 
 ### Multi-Chain Bridge Services
 - **Solana Service**: Complete Solana blockchain integration including address creation, validation, transfers, bridge operations, balance queries, transaction queries, and payment operations
-- **Polygon Service**: Polygon blockchain bridge, balance queries, transaction queries, and payment operations
-- **BSC Service**: Binance Smart Chain bridge, balance queries, transaction queries, and payment operations
-- **Base Service**: Base blockchain bridge, balance queries, transaction queries, and payment operations
-- **Arbitrum Service**: Arbitrum blockchain bridge, balance queries, transaction queries, and payment operations
+- **Polygon Service**: Polygon blockchain bridge, balance queries, transaction queries, payment operations, gas token transfers, and reserve management
+- **BSC Service**: Binance Smart Chain bridge, balance queries, transaction queries, payment operations, gas token transfers, and reserve management
+- **Base Service**: Base blockchain bridge, balance queries, transaction queries, payment operations, gas token transfers, and reserve management
+- **Arbitrum Service**: Arbitrum blockchain bridge, balance queries, transaction queries, payment operations, gas token transfers, and reserve management
+- **ETH Service**: Ethereum blockchain integration including bridge operations, balance queries, transaction queries, token transfers, payment operations, and reserve management
+- **Tron Service**: Tron (TRX) blockchain integration including address validation, balance queries (standard and virtual), transaction queries, TRX and TRC-20 token transfers
+- **AVAX Service**: Avalanche reserve management (update project and merchant reserves)
+
+### Utility Services
+- **Storage Service**: On-chain storage state management — register/unregister contracts, version control, ownership transfer
+- **Util Service**: Address validation and transaction count queries
+- **Raw Service**: Send raw transaction data to the Toronet blockchain
+- **Auth Service**: Client authentication and token management
+- **Contract Service**: Smart contract interactions — sign messages, recover message signers, call contract functions with automatic encoding
+- **Deployer Service**: Deploy compiled smart contracts to Toronet mainnet or testnet via Toroforge
 
 ### Configuration
 - **Network Selection**: Easy switching between mainnet and testnet
@@ -48,8 +93,8 @@ dependencies:
   toronet:
     path: ../  # For local development
     # or
-    # toronet: ^<latest_version>  # When published to pub.dev
-  dio: ^5.0.0
+    # toronet: ^0.0.4  # When published to pub.dev
+  dio: ^5.4.0
 ```
 
 ### Import
@@ -67,16 +112,24 @@ import 'package:toronet/toronet.dart';
 ```dart
 import 'package:toronet/toronet.dart';
 
-// Initialize SDK with network selection
+// Mainnet (default)
 final sdk = ToronetSDK(network: Network.mainnet);
 
-// Or use testnet
-final sdk = ToronetSDK(network: Network.testnet);
+// Testnet
+final testSdk = ToronetSDK(network: Network.testnet);
 
-// Or use custom URLs (backward compatible)
-final sdk = ToronetSDK(
+// Custom URLs (backward compatible)
+final customSdk = ToronetSDK(
   baseUrl: 'https://www.toronet.org',
   paymentsUrl: 'https://payments.connectw.com',
+);
+
+// Network + custom URL overrides
+final overrideSdk = ToronetSDK(
+  network: Network.testnet,
+  customBaseUrl: 'https://custom.toronet.org',
+  customConnectWUrl: 'https://custom.connectw.com',
+  customDeployerUrl: 'https://custom-deployer.toronet.org/api/mainnet',
 );
 ```
 
@@ -631,6 +684,15 @@ final bridgeResult = await sdk.polygonService.bridgeToken(
   adminpwd: 'password',
 );
 
+// Bridge native MATIC to Toronet
+await sdk.polygonService.bridgeGasToken(
+  from: wallet.address,
+  password: 'password',
+  amount: '1.0',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
 // Get Polygon balance
 final balance = await sdk.polygonService.getBalance(
   address: wallet.address,
@@ -645,9 +707,19 @@ final tokenBalance = await sdk.polygonService.getTokenBalance(
   tokenName: 'USDC',
 );
 
-// Get transactions
-final transactions = await sdk.polygonService.getTransactions(
-  address: wallet.address,
+// Transfer native MATIC
+await sdk.polygonService.transferGasToken(
+  from: wallet.address,
+  to: '0x...',
+  amount: '0.5',
+  password: 'password',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Update project Polygon reserve
+await sdk.polygonService.updateProjectReserve(
+  polyAddress: wallet.address,
   admin: adminAddress,
   adminpwd: 'password',
 );
@@ -679,6 +751,15 @@ final bridgeResult = await sdk.bscService.bridgeToken(
   adminpwd: 'password',
 );
 
+// Bridge native BNB to Toronet
+await sdk.bscService.bridgeGasToken(
+  from: wallet.address,
+  password: 'password',
+  amount: '0.05',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
 // Get BSC balance
 final balance = await sdk.bscService.getBalance(
   address: wallet.address,
@@ -691,6 +772,41 @@ final tokenBalance = await sdk.bscService.getTokenBalance(
   address: wallet.address,
   contractAddress: '0x55d398326f99059ff775485246999027b3197955',
   tokenName: 'USDT',
+);
+
+// Get latest BSC block
+final block = await sdk.bscService.getLatestBlock(
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Transfer native BNB
+await sdk.bscService.transferGasToken(
+  from: wallet.address,
+  to: '0x...',
+  amount: '0.01',
+  password: 'password',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Transfer BEP-20 token
+await sdk.bscService.transferToken(
+  from: wallet.address,
+  to: '0x...',
+  amount: '5',
+  password: 'password',
+  contractAddress: '0x55d398326f99059ff775485246999027b3197955',
+  tokenName: 'USDT',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Update project BSC reserve
+await sdk.bscService.updateProjectReserve(
+  bscAddress: wallet.address,
+  admin: adminAddress,
+  adminpwd: 'password',
 );
 
 // Initialize payment with BSC
@@ -720,9 +836,35 @@ final bridgeResult = await sdk.baseService.bridgeToken(
   adminpwd: 'password',
 );
 
+// Bridge native ETH (on Base) to Toronet
+await sdk.baseService.bridgeGasToken(
+  from: wallet.address,
+  password: 'password',
+  amount: '0.01',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
 // Get Base balance
 final balance = await sdk.baseService.getBalance(
   address: wallet.address,
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Transfer native ETH (on Base)
+await sdk.baseService.transferGasToken(
+  from: wallet.address,
+  to: '0x...',
+  amount: '0.01',
+  password: 'password',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Update project Base reserve
+await sdk.baseService.updateProjectReserve(
+  baseAddress: wallet.address,
   admin: adminAddress,
   adminpwd: 'password',
 );
@@ -761,6 +903,23 @@ final balance = await sdk.arbitrumService.getBalance(
   adminpwd: 'password',
 );
 
+// Transfer gas token (ETH on Arbitrum)
+final transfer = await sdk.arbitrumService.transferGasToken(
+  from: wallet.address,
+  to: '0x...',
+  amount: '0.01',
+  password: 'password',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Update project Arbitrum reserve
+await sdk.arbitrumService.updateProjectReserve(
+  arbAddress: wallet.address,
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
 // Initialize payment with Arbitrum
 final paymentInit = await sdk.arbitrumService.paymentInitialize(
   address: wallet.address,
@@ -774,6 +933,328 @@ final paymentInit = await sdk.arbitrumService.paymentInitialize(
 );
 ```
 
+#### ETH Operations
+
+```dart
+// Get ETH balance
+final balance = await sdk.ethService.getBalance(
+  address: wallet.address,
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Get ETH token balance
+final tokenBalance = await sdk.ethService.getTokenBalance(
+  address: wallet.address,
+  contractAddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
+  tokenName: 'USDT',
+);
+
+// Bridge token from Ethereum to Toronet
+final bridgeResult = await sdk.ethService.bridgeToken(
+  from: wallet.address,
+  password: 'password',
+  contractAddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
+  tokenName: 'USDT',
+  amount: '10',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Bridge native ETH to Toronet
+final gasResult = await sdk.ethService.bridgeGasToken(
+  from: wallet.address,
+  password: 'password',
+  amount: '0.05',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Transfer native ETH
+await sdk.ethService.transferGasToken(
+  from: wallet.address,
+  to: '0x...',
+  amount: '0.01',
+  password: 'password',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Update project ETH reserve
+await sdk.ethService.updateProjectReserve(
+  ethAddress: wallet.address,
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Initialize payment with Ethereum
+final paymentInit = await sdk.ethService.paymentInitialize(
+  address: wallet.address,
+  password: 'password',
+  currency: 'USDTETH',
+  token: 'TORO',
+  amount: '5.0',
+  payername: 'John Doe',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+```
+
+#### AVAX Reserve Operations
+
+```dart
+// Update project AVAX reserve
+await sdk.avaxService.updateProjectReserve(
+  avaxAddress: wallet.address,
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Update merchant AVAX reserve
+await sdk.avaxService.updateMerchantReserve(
+  avaxAddress: wallet.address,
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+```
+
+#### Tron (TRX) Operations
+
+```dart
+// Validate a Tron address
+final isValid = await sdk.tronService.isValidTronAddress(
+  address: 'TBjkrvhLoh6v7KBuziZs5fL4NqpbCzgXdf',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Get TRX balance
+final balance = await sdk.tronService.getBalance(
+  address: 'TBjkrvhLoh6v7KBuziZs5fL4NqpbCzgXdf',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Get TRX balance for a virtual address
+final virtualBalance = await sdk.tronService.getBalanceVirtualAddress(
+  address: wallet.address,
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Get TRC-20 token balance
+final tokenBalance = await sdk.tronService.getTokenBalance(
+  address: 'TYKRzh8s4jrYs5CtaX5UV2BNHcUMgeHC1U',
+  contractAddress: 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
+  tokenName: 'USDT',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Get TRX transactions
+final transactions = await sdk.tronService.getTransactions(
+  address: 'TYKRzh8s4jrYs5CtaX5UV2BNHcUMgeHC1U',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Transfer TRX
+await sdk.tronService.transferTrx(
+  from: 'TYKRzh8s4jrYs5CtaX5UV2BNHcUMgeHC1U',
+  to: 'TBjkrvhLoh6v7KBuziZs5fL4NqpbCzgXdf',
+  amount: '10',
+  password: 'password',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Transfer TRC-20 token
+await sdk.tronService.transferTrxToken(
+  from: 'TYKRzh8s4jrYs5CtaX5UV2BNHcUMgeHC1U',
+  to: 'TBjkrvhLoh6v7KBuziZs5fL4NqpbCzgXdf',
+  amount: '5',
+  password: 'password',
+  contractAddress: 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
+  tokenName: 'USDT',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Get TRC-20 token transactions
+final tokenTxns = await sdk.tronService.getTokenTransactions(
+  address: 'TYKRzh8s4jrYs5CtaX5UV2BNHcUMgeHC1U',
+  contractAddress: 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
+  tokenName: 'USDT',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Get latest Tron block
+final block = await sdk.tronService.getLatestBlock(
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+
+// Verify a Tron virtual address
+final verifyResult = await sdk.tronService.verifyTronVirtualAddress(
+  from: wallet.address,
+  password: 'password',
+  admin: adminAddress,
+  adminpwd: 'password',
+);
+```
+
+### Utility, Raw & Auth Operations
+
+```dart
+// Check if an address is valid
+final isValid = await sdk.utilService.isAddress(address: wallet.address);
+
+// Get transaction count for an address
+final count = await sdk.utilService.getTransactionCount(address: wallet.address);
+
+// Send raw transaction data
+final rawResult = await sdk.rawService.sendRawData(rawData: '0x...');
+
+// Get auth status for an address
+final authStatus = await sdk.authService.getAuthStatus(address: wallet.address);
+
+// Verify an auth token
+final tokenValid = await sdk.authService.verifyAuthToken(token: 'existing_token');
+
+// Authenticate a client
+final authResult = await sdk.authService.authenticateClient(
+  address: wallet.address,
+  password: 'password',
+);
+
+// Refresh auth token
+final refreshed = await sdk.authService.refreshAuthToken(
+  address: wallet.address,
+  token: 'existing_token',
+);
+```
+
+### Storage Operations
+
+```dart
+// Check if storage is enabled
+final isOn = await sdk.storageService.isStorageOn();
+
+// Check if a contract is registered
+final isRegistered = await sdk.storageService.isContractRegistered(
+  contractAddress: '0x...',
+);
+
+// Get current storage version
+final version = await sdk.storageService.getStorageVersion();
+
+// Register a contract (owner operation)
+await sdk.storageService.registerContract(
+  owner: ownerAddress,
+  ownerPassword: 'password',
+  contractAddress: '0x...',
+);
+
+// Unregister a contract
+await sdk.storageService.unregisterContract(
+  owner: ownerAddress,
+  ownerPassword: 'password',
+  contractAddress: '0x...',
+);
+
+// Increase storage version
+await sdk.storageService.increaseStorageVersion(
+  owner: ownerAddress,
+  ownerPassword: 'password',
+);
+
+// Transfer ownership
+await sdk.storageService.transferOwnership(
+  owner: ownerAddress,
+  ownerPassword: 'password',
+  newOwner: '0x...',
+);
+```
+
+### Smart Contract Operations
+
+```dart
+// Sign a message with a wallet
+final signed = await sdk.contractService.signMessage(
+  address: wallet.address,
+  password: 'password',
+  message: 'Hello Toronet',
+);
+
+// Recover the signer of a signed message
+final signer = await sdk.contractService.getMessageSigner(
+  message: 'Hello Toronet',
+  signedMessage: signed['data'],
+);
+
+// Call a contract function (SDK handles encoding automatically)
+final result = await sdk.contractService.callContractFunction(
+  address: wallet.address,
+  password: 'password',
+  contractAddress: '0xContractAddress',
+  functionName: 'transfer',
+  functionArguments: ['0xRecipient', '1000'],
+  abi: [
+    {
+      'name': 'transfer',
+      'type': 'function',
+      'inputs': [
+        {'name': 'to', 'type': 'address'},
+        {'name': 'amount', 'type': 'uint256'},
+      ],
+      'outputs': [{'name': '', 'type': 'bool'}],
+    },
+  ],
+);
+
+// Call a contract function with pre-encoded arguments (override path)
+final rawResult = await sdk.contractService.callContractFunction(
+  address: wallet.address,
+  password: 'password',
+  contractAddress: '0xContractAddress',
+  functionName: 'transfer',
+  rawFunctionArguments: '0xRecipient%7C1000',  // pipe-joined + URI-encoded
+  rawAbi: Uri.encodeComponent('[{"name":"transfer",...}]'),
+);
+```
+
+### Contract Deployment
+
+```dart
+// Deploy to testnet (no token required)
+final deployed = await sdk.deployerService.deployContract(
+  owner: wallet.address,
+  abi: [
+    {
+      'name': 'transfer',
+      'type': 'function',
+      'inputs': [
+        {'name': 'to', 'type': 'address'},
+        {'name': 'amount', 'type': 'uint256'},
+      ],
+    },
+  ],
+  bytecode: '0x608060405234801561001057600080fd...',
+  constructorArgs: [],
+);
+print(deployed['contractAddress']);
+
+// Deploy to mainnet (token required — obtain from Toronet/Toroforge team)
+final deployedMain = await sdk.deployerService.deployContract(
+  owner: wallet.address,
+  abi: myAbi,
+  bytecode: '0x...',
+  constructorArgs: ['arg1', 42],
+  token: 'your-toronet-deployer-token',
+);
+```
+
 ---
 
 ## Network Configuration
@@ -781,24 +1262,28 @@ final paymentInit = await sdk.arbitrumService.paymentInitialize(
 The SDK supports easy switching between mainnet and testnet:
 
 ```dart
-// Use mainnet (default)
+// Mainnet (default) — base URL: https://api.toronet.org
 final sdk = ToronetSDK(network: Network.mainnet);
 
-// Use testnet
-final sdk = ToronetSDK(network: Network.testnet);
+// Testnet — base URL: https://testnet.toronet.org
+final testSdk = ToronetSDK(network: Network.testnet);
 
-// Use network with custom URLs
-final sdk = ToronetSDK(
+// Network + custom URL overrides
+final customSdk = ToronetSDK(
   network: Network.testnet,
   customBaseUrl: 'https://custom.toronet.org',
   customConnectWUrl: 'https://custom.connectw.com',
+  customDeployerUrl: 'https://custom-deployer.toronet.org/api/mainnet',
 );
 
-// Backward compatible: use custom URLs directly
-final sdk = ToronetSDK(
+// Backward compatible: provide URLs directly (uses mainnet defaults for anything not set)
+final legacySdk = ToronetSDK(
   baseUrl: 'https://www.toronet.org',
   paymentsUrl: 'https://payments.connectw.com',
 );
+
+// Access configured URLs at runtime
+final deployerEndpoint = sdk.deployerUrl;
 ```
 
 ---
@@ -856,11 +1341,21 @@ Main entry point providing access to all services:
 - `tokenService`: Token operations
 - `productsService`: Product management
 - `virtualService`: Virtual wallet operations
+- `storageService`: On-chain storage state management
 - `solanaService`: Solana blockchain operations
 - `polygonService`: Polygon blockchain operations
 - `bscService`: BSC (Binance Smart Chain) blockchain operations
 - `baseService`: Base blockchain operations
 - `arbitrumService`: Arbitrum blockchain operations
+- `ethService`: Ethereum blockchain operations
+- `tronService`: Tron (TRX) blockchain operations
+- `avaxService`: Avalanche reserve management
+- `utilService`: Address validation and transaction count
+- `rawService`: Send raw transaction data
+- `authService`: Client authentication and token management
+- `contractService`: Smart contract interactions (sign messages, recover signers, call functions)
+- `deployerService`: Deploy compiled smart contracts to mainnet/testnet
+- `deployerUrl`: Configured deployer endpoint URL (`String`)
 
 ### Supported Currencies
 
