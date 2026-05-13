@@ -35,7 +35,7 @@ Future<Map<String, dynamic>> getCurrencyBalanceApi(
   String address,
 ) async {
   final currencyStr = _getCurrencyString(currency);
-  final url = '$baseUrl/api/currency/$currencyStr/';
+  final url = '$baseUrl/currency/$currencyStr/';
   final data = {
     'op': 'getbalance',
     'params': [
@@ -62,7 +62,7 @@ Future<Map<String, dynamic>> getCurrencyNameApi(
   Currency currency,
 ) async {
   final currencyStr = _getCurrencyString(currency);
-  final url = '$baseUrl/api/currency/$currencyStr/';
+  final url = '$baseUrl/currency/$currencyStr/';
   final data = {'op': 'getname', 'params': []};
   final response = await dio.request(
     url,
@@ -84,7 +84,7 @@ Future<Map<String, dynamic>> getCurrencySymbolApi(
   Currency currency,
 ) async {
   final currencyStr = _getCurrencyString(currency);
-  final url = '$baseUrl/api/currency/$currencyStr/';
+  final url = '$baseUrl/currency/$currencyStr/';
   final data = {'op': 'getsymbol', 'params': []};
   final response = await dio.request(
     url,
@@ -112,7 +112,7 @@ Future<Map<String, dynamic>> transferCurrencyApi(
   String amount,
 ) async {
   final currencyStr = _getCurrencyString(currency);
-  final url = '$baseUrl/api/currency/$currencyStr/cl';
+  final url = '$baseUrl/currency/$currencyStr/cl';
   final data = {
     'op': 'transfer',
     'params': [
@@ -136,7 +136,7 @@ Future<Map<String, dynamic>> getCurrencyBalanceClientApi(
   String address,
 ) async {
   final currencyStr = _getCurrencyString(currency);
-  final url = '$baseUrl/api/currency/$currencyStr/cl';
+  final url = '$baseUrl/currency/$currencyStr/cl';
   final data = {
     'op': 'getbalance',
     'params': [
@@ -167,7 +167,7 @@ Future<Map<String, dynamic>> allowTransferApi(
   String ownerPassword,
 ) async {
   final currencyStr = _getCurrencyString(currency);
-  final url = '$baseUrl/api/currency/$currencyStr/ow';
+  final url = '$baseUrl/currency/$currencyStr/ow';
   final data = {
     'op': 'allowtransfer',
     'params': [
@@ -190,7 +190,7 @@ Future<Map<String, dynamic>> disallowTransferApi(
   String ownerPassword,
 ) async {
   final currencyStr = _getCurrencyString(currency);
-  final url = '$baseUrl/api/currency/$currencyStr/ow';
+  final url = '$baseUrl/currency/$currencyStr/ow';
   final data = {
     'op': 'disallowtransfer',
     'params': [
@@ -215,7 +215,7 @@ Future<Map<String, dynamic>> mintCurrencyApi(
   String amount,
 ) async {
   final currencyStr = _getCurrencyString(currency);
-  final url = '$baseUrl/api/currency/$currencyStr/ow';
+  final url = '$baseUrl/currency/$currencyStr/ow';
   final data = {
     'op': 'mint',
     'params': [
@@ -242,7 +242,7 @@ Future<Map<String, dynamic>> burnCurrencyApi(
   String amount,
 ) async {
   final currencyStr = _getCurrencyString(currency);
-  final url = '$baseUrl/api/currency/$currencyStr/ow';
+  final url = '$baseUrl/currency/$currencyStr/ow';
   final data = {
     'op': 'burn',
     'params': [
@@ -270,7 +270,7 @@ Future<Map<String, dynamic>> freezeCurrencyApi(
   String address,
 ) async {
   final currencyStr = _getCurrencyString(currency);
-  final url = '$baseUrl/api/currency/$currencyStr/ad';
+  final url = '$baseUrl/currency/$currencyStr/ad';
   final data = {
     'op': 'freeze',
     'params': [
@@ -295,7 +295,7 @@ Future<Map<String, dynamic>> unfreezeCurrencyApi(
   String address,
 ) async {
   final currencyStr = _getCurrencyString(currency);
-  final url = '$baseUrl/api/currency/$currencyStr/ad';
+  final url = '$baseUrl/currency/$currencyStr/ad';
   final data = {
     'op': 'unfreeze',
     'params': [
@@ -320,7 +320,7 @@ Future<Map<String, dynamic>> enrollCurrencyApi(
   String address,
 ) async {
   final currencyStr = _getCurrencyString(currency);
-  final url = '$baseUrl/api/currency/$currencyStr/ad';
+  final url = '$baseUrl/currency/$currencyStr/ad';
   final data = {
     'op': 'enroll',
     'params': [
@@ -346,7 +346,7 @@ Future<Map<String, dynamic>> mintCurrencyAdminApi(
   String amount,
 ) async {
   final currencyStr = _getCurrencyString(currency);
-  final url = '$baseUrl/api/currency/$currencyStr/ad';
+  final url = '$baseUrl/currency/$currencyStr/ad';
   final data = {
     'op': 'mint',
     'params': [
@@ -373,7 +373,7 @@ Future<Map<String, dynamic>> burnCurrencyAdminApi(
   String amount,
 ) async {
   final currencyStr = _getCurrencyString(currency);
-  final url = '$baseUrl/api/currency/$currencyStr/ad';
+  final url = '$baseUrl/currency/$currencyStr/ad';
   final data = {
     'op': 'burn',
     'params': [
@@ -400,7 +400,7 @@ Future<Map<String, dynamic>> setAllowancesApi(
   String maximum,
 ) async {
   final currencyStr = _getCurrencyString(currency);
-  final url = '$baseUrl/api/currency/$currencyStr/ad';
+  final url = '$baseUrl/currency/$currencyStr/ad';
   final data = {
     'op': 'setallowances',
     'params': [
@@ -425,7 +425,7 @@ Future<Map<String, dynamic>> getTransactionFeeFixedApi(
   Currency currency,
 ) async {
   final currencyStr = _getCurrencyString(currency);
-  final url = '$baseUrl/api/currency/$currencyStr/';
+  final url = '$baseUrl/currency/$currencyStr/';
   final data = {'op': 'gettransactionfeefixed', 'params': []};
   final response = await dio.request(
     url,
@@ -447,7 +447,7 @@ Future<Map<String, dynamic>> getTransactionFeePercentageApi(
   Currency currency,
 ) async {
   final currencyStr = _getCurrencyString(currency);
-  final url = '$baseUrl/api/currency/$currencyStr/';
+  final url = '$baseUrl/currency/$currencyStr/';
   final data = {'op': 'gettransactionfeepercentage', 'params': []};
   final response = await dio.request(
     url,
@@ -470,7 +470,7 @@ Future<Map<String, dynamic>> getTransactionFeeApi(
   String amount,
 ) async {
   final currencyStr = _getCurrencyString(currency);
-  final url = '$baseUrl/api/currency/$currencyStr/';
+  final url = '$baseUrl/currency/$currencyStr/';
   final data = {
     'op': 'gettransactionfee',
     'params': [
