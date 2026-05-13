@@ -8,7 +8,7 @@ Future<Map<String, dynamic>> getTNSNameApi(
   String baseUrl,
   String address,
 ) async {
-  final url = '$baseUrl/api/tns';
+  final url = '$baseUrl/tns';
   final data = {
     'op': 'getname',
     'params': [
@@ -34,7 +34,7 @@ Future<Map<String, dynamic>> getTNSAddressApi(
   String baseUrl,
   String name,
 ) async {
-  final url = '$baseUrl/api/tns';
+  final url = '$baseUrl/tns';
   final data = {
     'op': 'getaddr',
     'params': [
@@ -60,7 +60,7 @@ Future<bool> isTNSAddressAssignedApi(
   String baseUrl,
   String address,
 ) async {
-  final url = '$baseUrl/api/tns';
+  final url = '$baseUrl/tns';
   final data = {
     'op': 'isaddrassigned',
     'params': [
@@ -82,7 +82,7 @@ Future<bool> isTNSAddressAssignedApi(
 }
 
 Future<bool> isTNSSetOnApi(Dio dio, String baseUrl) async {
-  final url = '$baseUrl/api/tns';
+  final url = '$baseUrl/tns';
   final data = {'op': 'isseton', 'params': []};
   final response = await dio.request(
     url,
@@ -99,7 +99,7 @@ Future<bool> isTNSSetOnApi(Dio dio, String baseUrl) async {
 }
 
 Future<bool> isTNSUpdateOnApi(Dio dio, String baseUrl) async {
-  final url = '$baseUrl/api/tns';
+  final url = '$baseUrl/tns';
   final data = {'op': 'isupdateon', 'params': []};
   final response = await dio.request(
     url,
@@ -116,7 +116,7 @@ Future<bool> isTNSUpdateOnApi(Dio dio, String baseUrl) async {
 }
 
 Future<bool> isTNSDeleteOnApi(Dio dio, String baseUrl) async {
-  final url = '$baseUrl/api/tns';
+  final url = '$baseUrl/tns';
   final data = {'op': 'isdeleteon', 'params': []};
   final response = await dio.request(
     url,
@@ -141,7 +141,7 @@ Future<Map<String, dynamic>> updateTNSNameApi(
   String password,
   String name,
 ) async {
-  final url = '$baseUrl/api/tns/cl';
+  final url = '$baseUrl/tns/cl';
   final data = {
     'op': 'updatename',
     'params': [
@@ -163,7 +163,7 @@ Future<Map<String, dynamic>> deleteTNSNameApi(
   String address,
   String password,
 ) async {
-  final url = '$baseUrl/api/tns/cl';
+  final url = '$baseUrl/tns/cl';
   final data = {
     'op': 'deletename',
     'params': [
@@ -186,7 +186,7 @@ Future<Map<String, dynamic>> initTNSApi(
   String owner,
   String ownerPassword,
 ) async {
-  final url = '$baseUrl/api/tns/ow';
+  final url = '$baseUrl/tns/ow';
   final data = {
     'op': 'inittns',
     'params': [
@@ -207,7 +207,7 @@ Future<Map<String, dynamic>> setTNSSetNameOnApi(
   String owner,
   String ownerPassword,
 ) async {
-  final url = '$baseUrl/api/tns/ow';
+  final url = '$baseUrl/tns/ow';
   final data = {
     'op': 'setseton',
     'params': [
@@ -228,7 +228,7 @@ Future<Map<String, dynamic>> setTNSSetNameOffApi(
   String owner,
   String ownerPassword,
 ) async {
-  final url = '$baseUrl/api/tns/ow';
+  final url = '$baseUrl/tns/ow';
   final data = {
     'op': 'setsetoff',
     'params': [
@@ -249,7 +249,7 @@ Future<Map<String, dynamic>> setTNSUpdateOnApi(
   String owner,
   String ownerPassword,
 ) async {
-  final url = '$baseUrl/api/tns/ow';
+  final url = '$baseUrl/tns/ow';
   final data = {
     'op': 'setupdateon',
     'params': [
@@ -270,7 +270,7 @@ Future<Map<String, dynamic>> setTNSUpdateOffApi(
   String owner,
   String ownerPassword,
 ) async {
-  final url = '$baseUrl/api/tns/ow';
+  final url = '$baseUrl/tns/ow';
   final data = {
     'op': 'setupdateoff',
     'params': [
@@ -291,7 +291,7 @@ Future<Map<String, dynamic>> setTNSDeleteOnApi(
   String owner,
   String ownerPassword,
 ) async {
-  final url = '$baseUrl/api/tns/ow';
+  final url = '$baseUrl/tns/ow';
   final data = {
     'op': 'setdeleteon',
     'params': [
@@ -312,7 +312,7 @@ Future<Map<String, dynamic>> setTNSDeleteOffApi(
   String owner,
   String ownerPassword,
 ) async {
-  final url = '$baseUrl/api/tns/ow';
+  final url = '$baseUrl/tns/ow';
   final data = {
     'op': 'setdeleteoff',
     'params': [
@@ -337,7 +337,7 @@ Future<Map<String, dynamic>> adminSetTNSNameApi(
   String address,
   String name,
 ) async {
-  final url = '$baseUrl/api/tns/ad';
+  final url = '$baseUrl/tns/ad';
   final data = {
     'op': 'adminsetname',
     'params': [
@@ -362,7 +362,7 @@ Future<Map<String, dynamic>> adminUpdateTNSNameApi(
   String address,
   String name,
 ) async {
-  final url = '$baseUrl/api/tns/ad';
+  final url = '$baseUrl/tns/ad';
   final data = {
     'op': 'adminupdatename',
     'params': [
@@ -386,7 +386,7 @@ Future<Map<String, dynamic>> adminDeleteTNSNameApi(
   String adminPassword,
   String address,
 ) async {
-  final url = '$baseUrl/api/tns/ad';
+  final url = '$baseUrl/tns/ad';
   final data = {
     'op': 'admindeletename',
     'params': [
