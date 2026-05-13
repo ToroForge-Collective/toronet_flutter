@@ -162,4 +162,112 @@ class BaseServiceImpl implements BaseService {
       adminpwd: adminpwd,
     );
   }
+
+  @override
+  Future<Map<String, dynamic>> getLatestBlock({
+    required String admin,
+    required String adminpwd,
+  }) {
+    return getLatestBlockBaseApi(
+      dio: dio,
+      baseUrl: baseUrl,
+      admin: admin,
+      adminpwd: adminpwd,
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> bridgeGasToken({
+    required String from,
+    required String password,
+    required String amount,
+    required String admin,
+    required String adminpwd,
+  }) {
+    return bridgeGasTokenBaseApi(
+      dio: dio,
+      baseUrl: baseUrl,
+      from: from,
+      password: password,
+      amount: amount,
+      admin: admin,
+      adminpwd: adminpwd,
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> transferGasToken({
+    required String from,
+    required String to,
+    required String amount,
+    required String password,
+    required String admin,
+    required String adminpwd,
+  }) {
+    return transferGasTokenBaseApi(
+      dio: dio,
+      baseUrl: baseUrl,
+      from: from,
+      to: to,
+      amount: amount,
+      password: password,
+      admin: admin,
+      adminpwd: adminpwd,
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> transferToken({
+    required String from,
+    required String to,
+    required String amount,
+    required String password,
+    required String contractAddress,
+    required String tokenName,
+    required String admin,
+    required String adminpwd,
+  }) {
+    return transferTokenBaseApi(
+      dio: dio,
+      baseUrl: baseUrl,
+      from: from,
+      to: to,
+      amount: amount,
+      password: password,
+      contractAddress: contractAddress,
+      tokenName: tokenName,
+      admin: admin,
+      adminpwd: adminpwd,
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> updateProjectReserve({
+    required String baseAddress,
+    required String admin,
+    required String adminpwd,
+  }) {
+    return updateProjectBaseReserveApi(
+      dio: dio,
+      baseUrl: baseUrl,
+      baseAddress: baseAddress,
+      admin: admin,
+      adminpwd: adminpwd,
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> updateMerchantReserve({
+    required String baseAddress,
+    required String admin,
+    required String adminpwd,
+  }) {
+    return updateMerchantBaseReserveApi(
+      dio: dio,
+      baseUrl: baseUrl,
+      baseAddress: baseAddress,
+      admin: admin,
+      adminpwd: adminpwd,
+    );
+  }
 }
