@@ -14,7 +14,7 @@ Future<Map<String, dynamic>> getTokenNameApi(
   String tokenType,
 ) async {
   final tokenStr = _getTokenString(tokenType);
-  final url = '$baseUrl/api/token/$tokenStr/';
+  final url = '$baseUrl/token/$tokenStr/';
   final data = {'op': 'getname', 'params': []};
   final response = await dio.request(
     url,
@@ -36,7 +36,7 @@ Future<Map<String, dynamic>> getTokenSymbolApi(
   String tokenType,
 ) async {
   final tokenStr = _getTokenString(tokenType);
-  final url = '$baseUrl/api/token/$tokenStr/';
+  final url = '$baseUrl/token/$tokenStr/';
   final data = {'op': 'getsymbol', 'params': []};
   final response = await dio.request(
     url,
@@ -58,7 +58,7 @@ Future<Map<String, dynamic>> getTokenDecimalApi(
   String tokenType,
 ) async {
   final tokenStr = _getTokenString(tokenType);
-  final url = '$baseUrl/api/token/$tokenStr/';
+  final url = '$baseUrl/token/$tokenStr/';
   final data = {'op': 'getdecimal', 'params': []};
   final response = await dio.request(
     url,
@@ -83,7 +83,7 @@ Future<Map<String, dynamic>> getTokenBalanceApi(
   String address,
 ) async {
   final tokenStr = _getTokenString(tokenType);
-  final url = '$baseUrl/api/token/$tokenStr/';
+  final url = '$baseUrl/token/$tokenStr/';
   final data = {
     'op': 'getbalance',
     'params': [
@@ -112,7 +112,7 @@ Future<Map<String, dynamic>> getMinimumAllowanceApi(
   String tokenType,
 ) async {
   final tokenStr = _getTokenString(tokenType);
-  final url = '$baseUrl/api/token/$tokenStr/';
+  final url = '$baseUrl/token/$tokenStr/';
   final data = {'op': 'getminimumallowance', 'params': []};
   final response = await dio.request(
     url,
@@ -134,7 +134,7 @@ Future<Map<String, dynamic>> getMaximumAllowanceApi(
   String tokenType,
 ) async {
   final tokenStr = _getTokenString(tokenType);
-  final url = '$baseUrl/api/token/$tokenStr/';
+  final url = '$baseUrl/token/$tokenStr/';
   final data = {'op': 'getmaximumallowance', 'params': []};
   final response = await dio.request(
     url,
@@ -158,7 +158,7 @@ Future<Map<String, dynamic>> getAllowanceApi(
   String spender,
 ) async {
   final tokenStr = _getTokenString(tokenType);
-  final url = '$baseUrl/api/token/$tokenStr/';
+  final url = '$baseUrl/token/$tokenStr/';
   final data = {
     'op': 'getallowance',
     'params': [
@@ -188,7 +188,7 @@ Future<Map<String, dynamic>> getTransactionFeeFixedApi(
   String tokenType,
 ) async {
   final tokenStr = _getTokenString(tokenType);
-  final url = '$baseUrl/api/token/$tokenStr/';
+  final url = '$baseUrl/token/$tokenStr/';
   final data = {'op': 'gettransactionfeefixed', 'params': []};
   final response = await dio.request(
     url,
@@ -210,7 +210,7 @@ Future<Map<String, dynamic>> getTransactionFeePercentageApi(
   String tokenType,
 ) async {
   final tokenStr = _getTokenString(tokenType);
-  final url = '$baseUrl/api/token/$tokenStr/';
+  final url = '$baseUrl/token/$tokenStr/';
   final data = {'op': 'gettransactionfeepercentage', 'params': []};
   final response = await dio.request(
     url,
@@ -233,7 +233,7 @@ Future<Map<String, dynamic>> getTransactionFeeApi(
   String amount,
 ) async {
   final tokenStr = _getTokenString(tokenType);
-  final url = '$baseUrl/api/token/$tokenStr/';
+  final url = '$baseUrl/token/$tokenStr/';
   final data = {
     'op': 'gettransactionfee',
     'params': [
@@ -262,7 +262,7 @@ Future<Map<String, dynamic>> getReserveApi(
   String tokenType,
 ) async {
   final tokenStr = _getTokenString(tokenType);
-  final url = '$baseUrl/api/token/$tokenStr/';
+  final url = '$baseUrl/token/$tokenStr/';
   final data = {'op': 'getreserve', 'params': []};
   final response = await dio.request(
     url,
@@ -284,7 +284,7 @@ Future<Map<String, dynamic>> getTollerApi(
   String tokenType,
 ) async {
   final tokenStr = _getTokenString(tokenType);
-  final url = '$baseUrl/api/token/$tokenStr/';
+  final url = '$baseUrl/token/$tokenStr/';
   final data = {'op': 'gettoller', 'params': []};
   final response = await dio.request(
     url,
@@ -306,7 +306,7 @@ Future<Map<String, dynamic>> getTotalCapApi(
   String tokenType,
 ) async {
   final tokenStr = _getTokenString(tokenType);
-  final url = '$baseUrl/api/token/$tokenStr/';
+  final url = '$baseUrl/token/$tokenStr/';
   final data = {'op': 'gettotalcap', 'params': []};
   final response = await dio.request(
     url,
@@ -328,7 +328,7 @@ Future<Map<String, dynamic>> getTotalReservingApi(
   String tokenType,
 ) async {
   final tokenStr = _getTokenString(tokenType);
-  final url = '$baseUrl/api/token/$tokenStr/';
+  final url = '$baseUrl/token/$tokenStr/';
   final data = {'op': 'gettotalreserving', 'params': []};
   final response = await dio.request(
     url,
@@ -350,7 +350,7 @@ Future<Map<String, dynamic>> getTotalCirculatingApi(
   String tokenType,
 ) async {
   final tokenStr = _getTokenString(tokenType);
-  final url = '$baseUrl/api/token/$tokenStr/';
+  final url = '$baseUrl/token/$tokenStr/';
   final data = {'op': 'gettotalcirculating', 'params': []};
   final response = await dio.request(
     url,
@@ -375,7 +375,7 @@ Future<bool> isTokenEnrolledApi(
   String address,
 ) async {
   final tokenStr = _getTokenString(tokenType);
-  final url = '$baseUrl/api/token/$tokenStr/';
+  final url = '$baseUrl/token/$tokenStr/';
   final data = {
     'op': 'isenrolled',
     'params': [
@@ -403,7 +403,7 @@ Future<bool> isTokenFrozenApi(
   String address,
 ) async {
   final tokenStr = _getTokenString(tokenType);
-  final url = '$baseUrl/api/token/$tokenStr/';
+  final url = '$baseUrl/token/$tokenStr/';
   final data = {
     'op': 'isfrozen',
     'params': [
@@ -426,7 +426,7 @@ Future<bool> isTokenFrozenApi(
 
 Future<bool> isTransferOnApi(Dio dio, String baseUrl, String tokenType) async {
   final tokenStr = _getTokenString(tokenType);
-  final url = '$baseUrl/api/token/$tokenStr/';
+  final url = '$baseUrl/token/$tokenStr/';
   final data = {'op': 'istransferon', 'params': []};
   final response = await dio.request(
     url,
@@ -444,7 +444,7 @@ Future<bool> isTransferOnApi(Dio dio, String baseUrl, String tokenType) async {
 
 Future<bool> isMintOnApi(Dio dio, String baseUrl, String tokenType) async {
   final tokenStr = _getTokenString(tokenType);
-  final url = '$baseUrl/api/token/$tokenStr/';
+  final url = '$baseUrl/token/$tokenStr/';
   final data = {'op': 'isminton', 'params': []};
   final response = await dio.request(
     url,
@@ -462,7 +462,7 @@ Future<bool> isMintOnApi(Dio dio, String baseUrl, String tokenType) async {
 
 Future<bool> isBurnOnApi(Dio dio, String baseUrl, String tokenType) async {
   final tokenStr = _getTokenString(tokenType);
-  final url = '$baseUrl/api/token/$tokenStr/';
+  final url = '$baseUrl/token/$tokenStr/';
   final data = {'op': 'isburnon', 'params': []};
   final response = await dio.request(
     url,
@@ -488,7 +488,7 @@ Future<Map<String, dynamic>> selfEnrollTokenApi(
   String password,
 ) async {
   final tokenStr = _getTokenString(tokenType);
-  final url = '$baseUrl/api/token/$tokenStr/cl';
+  final url = '$baseUrl/token/$tokenStr/cl';
   final data = {
     'op': 'selfenroll',
     'params': [
