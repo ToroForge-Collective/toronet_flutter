@@ -10,7 +10,7 @@ Future<Map<String, dynamic>> createVirtualWalletApi(
   String admin,
   String adminPassword,
 ) async {
-  final url = '$baseUrl/api/payment/toro/';
+  final url = '$baseUrl/payment/toro/';
   final data = {
     'op': 'generatevirtualwallet',
     'params': [
@@ -43,7 +43,7 @@ Future<Map<String, dynamic>> fetchVirtualWalletApi(
   String admin,
   String adminPassword,
 ) async {
-  final url = '$baseUrl/api/payment/';
+  final url = '$baseUrl/payment/';
   final data = {
     'op': 'retrievevirtualwallet',
     'params': [
@@ -74,7 +74,7 @@ Future<Map<String, dynamic>> fetchVirtualWalletByAddressApi(
   String admin,
   String adminPassword,
 ) async {
-  final url = '$baseUrl/api/payment/';
+  final url = '$baseUrl/payment/';
   final data = {
     'op': 'getvirtualwalletbyaddress',
     'params': [
@@ -105,7 +105,7 @@ Future<Map<String, dynamic>> updateVirtualWalletTransactionsApi(
   String admin,
   String adminPassword,
 ) async {
-  final url = '$baseUrl/api/payment/';
+  final url = '$baseUrl/payment/';
   final data = {
     'op': 'updatevirtualwallettransactions',
     'params': [
