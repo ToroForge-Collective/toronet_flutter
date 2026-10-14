@@ -17,6 +17,7 @@ class MyCurrencyUtils{
     ).format(amount);
   }
 
+
   static String formatCurrency2(double value) {
     // Remove trailing zeros and the decimal point if not needed
     return value.toStringAsFixed(6).replaceFirst(RegExp(r'\.?0+$'), '');
